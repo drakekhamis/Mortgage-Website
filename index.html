@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Khamis Team at EPiQ Lending — Your trusted mortgage broker in Tempe, Arizona. Competitive rates, personal service, fast closings.">
+<title>The Khamis Team | EPiQ Lending | Mortgage Broker Tempe, AZ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* =====================
+   VARIABLES & RESET
+===================== */
+:root {
+  --charcoal:    #1a1a1a;
+  --charcoal-2:  #222222;
+  --charcoal-3:  #2a2a2a;
+  --charcoal-4:  #333333;
+  --orange:      #f05a00;
+  --orange-h:    #ff6820;
+  --orange-d:    #c94d00;
+  --white:       #ffffff;
+  --off-white:   #f5f5f0;
+  --gray:        #888888;
+  --gray-l:      #aaaaaa;
+  --gray-b:      #3a3a3a;
+  --fd: 'Bebas Neue', sans-serif;
+  --fb: 'Crimson Pro', Georgia, serif;
+  --t:  0.3s ease;
+  --ts: 0.6s ease;
+  --r:  4px;
+  --rl: 8px;
+  --sh: 0 4px 20px rgba(0,0,0,.4);
+  --sho:0 4px 20px rgba(240,90,0,.3);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--charcoal);color:var(--white);font-family:var(--fb);font-size:18px;line-height:1.6;overflow-x:hidden;cursor:none}
+body.no-scroll{overflow:hidden}
+a{text-decoration:none}
+img{max-width:100%}
+
+/* =====================
+   CUSTOM CURSOR
+===================== */
+#cd{position:fixed;width:8px;height:8px;background:var(--orange);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s}
+#cr{position:fixed;width:36px;height:36px;border:2px solid var(--orange);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .12s ease-out;opacity:.6}
+
+/* =====================
+   MARKET TICKER
+===================== */
+#ticker{background:#111;border-bottom:1px solid var(--gray-b);height:38px;display:flex;align-items:center;overflow:hidden}
+.tl{background:var(--orange);color:#fff;font-family:var(--fd);font-size:13px;letter-spacing:1px;padding:0 16px;height:100%;display:flex;align-items:center;flex-shrink:0;z-index:2;white-space:nowrap}
+.tt{display:flex;animation:tick 35s linear infinite;white-space:nowrap}
+.ti{display:inline-flex;align-items:center;gap:6px;padding:0 28px;font-size:13px;color:var(--gray-l);border-right:1px solid var(--gray-b)}
+.ti .tn{color:#fff;font-weight:600}
+.ti .tv{color:#fff}
+.ti .up{color:#4caf50}
+.ti .dn{color:#f44336}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* =====================
+   NAVIGATION
+===================== */
+#nav{position:sticky;top:0;background:rgba(26,26,26,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--gray-b);z-index:1000;transition:box-shadow var(--t)}
+#nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.5)}
+.ni{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:72px}
+.nl{display:flex;flex-direction:column;line-height:1.1;cursor:pointer}
+.nl .bm{font-family:var(--fd);font-size:22px;letter-spacing:2px;color:#fff}
+.nl .bs{font-size:11px;letter-spacing:3px;color:var(--orange);text-transform:uppercase}
+.nlinks{display:flex;list-style:none;gap:4px;align-items:center}
+.nlinks a{font-family:var(--fd);font-size:15px;letter-spacing:1.5px;color:var(--gray-l);padding:8px 14px;border-radius:var(--r);transition:color var(--t);position:relative}
+.nlinks a:hover,.nlinks a.active{color:#fff}
+.nlinks a.active::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:20px;height:2px;background:var(--orange);border-radius:2px}
+.ncta{background:var(--orange)!important;color:#fff!important;padding:10px 20px!important;border-radius:var(--r)!important}
+.ncta:hover{background:var(--orange-h)!important}
+.ncta.active::after{display:none!important}
+.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+.ham span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all var(--t)}
+
+/* =====================
+   MOBILE MENU
+===================== */
+.mm{position:fixed;inset:0;background:var(--charcoal);z-index:999;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px;transform:translateX(100%);transition:transform var(--ts)}
+.mm.open{transform:translateX(0)}
+.mm a{font-family:var(--fd);font-size:40px;letter-spacing:3px;color:var(--gray-l);transition:color var(--t)}
+.mm a:hover{color:var(--orange)}
+.mmc{position:absolute;top:24px;right:24px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer}
+
+/* =====================
+   PAGE SYSTEM
+===================== */
+.page{display:none;opacity:0;transform:translateY(12px);transition:opacity var(--ts),transform var(--ts);min-height:calc(100vh - 110px)}
+.page.active{display:block}
+.page.visible{opacity:1;transform:translateY(0)}
+
+/* =====================
+   COMMON LAYOUT
+===================== */
+.sec{max-width:1280px;margin:0 auto;padding:80px 24px}
+.sec-sm{max-width:1280px;margin:0 auto;padding:48px 24px}
+.slabel{font-family:var(--fb);font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
+.stitle{font-family:var(--fd);font-size:clamp(36px,5vw,64px);letter-spacing:2px;line-height:1;color:#fff;margin-bottom:20px}
+.ssub{font-size:18px;color:var(--gray-l);max-width:600px;line-height:1.7}
+.div{width:60px;height:3px;background:var(--orange);margin:20px 0;border-radius:2px}
+
+/* =====================
+   BUTTONS
+===================== */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--fd);font-size:16px;letter-spacing:2px;padding:14px 32px;border-radius:var(--r);border:none;cursor:pointer;transition:all var(--t);white-space:nowrap;text-decoration:none}
+.btn-p{background:var(--orange);color:#fff}
+.btn-p:hover{background:var(--orange-h);transform:translateY(-2px);box-shadow:var(--sho)}
+.btn-s{background:transparent;color:#fff;border:1px solid var(--gray-b)}
+.btn-s:hover{border-color:var(--orange);color:var(--orange);transform:translateY(-2px)}
+.btn-oo{background:transparent;color:var(--orange);border:1px solid var(--orange)}
+.btn-oo:hover{background:var(--orange);color:#fff;transform:translateY(-2px)}
+.btn-w{background:#fff;color:var(--orange)}
+.btn-w:hover{background:var(--off-white);transform:translateY(-2px)}
+.btn-ow{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.7)}
+.btn-ow:hover{border-color:#fff;background:rgba(255,255,255,.1);transform:translateY(-2px)}
+
+/* =====================
+   SCROLL REVEAL
+===================== */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.rv.rved{opacity:1;transform:translateY(0)}
+
+/* =====================
+   BACK TO TOP
+===================== */
+#btt{position:fixed;bottom:32px;right:32px;width:44px;height:44px;background:var(--orange);border:none;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:all var(--t);z-index:100}
+#btt.vis{opacity:1;transform:translateY(0)}
+#btt:hover{background:var(--orange-h);transform:translateY(-2px)}
+
+/* =====================
+   HOME — HERO
+===================== */
+.hero{position:relative;min-height:calc(100vh - 110px);display:flex;align-items:center;overflow:hidden}
+.hbg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(240,90,0,.08) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(240,90,0,.05) 0%,transparent 40%)}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(var(--gray-b) 1px,transparent 1px),linear-gradient(90deg,var(--gray-b) 1px,transparent 1px);background-size:60px 60px;opacity:.15}
+.hcont{max-width:1280px;margin:0 auto;padding:80px 24px;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%}
+.hbadge{display:inline-flex;align-items:center;gap:8px;background:rgba(240,90,0,.15);border:1px solid rgba(240,90,0,.3);color:var(--orange);font-size:12px;letter-spacing:3px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:24px}
+.hbadge::before{content:'';width:6px;height:6px;background:var(--orange);border-radius:50%;animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.htitle{font-family:var(--fd);font-size:clamp(52px,7vw,96px);letter-spacing:3px;line-height:.95;color:#fff;margin-bottom:24px}
+.htitle span{color:var(--orange)}
+.hdesc{font-size:18px;color:var(--gray-l);line-height:1.7;margin-bottom:40px;max-width:480px}
+.hactions{display:flex;gap:16px;flex-wrap:wrap}
+.hstats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px}
+.hstat{background:var(--charcoal-3);padding:20px;text-align:center}
+.hstat:first-child{border-radius:var(--r) 0 0 var(--r)}
+.hstat:last-child{border-radius:0 var(--r) var(--r) 0}
+.hstat .n{font-family:var(--fd);font-size:36px;color:var(--orange);letter-spacing:1px;display:block}
+.hstat .l{font-size:13px;color:var(--gray);text-transform:uppercase;letter-spacing:1px}
+
+/* Rate Card */
+.rcard{background:var(--charcoal-3);border:1px solid var(--gray-b);border-radius:var(--rl);padding:32px;position:relative;overflow:hidden}
+.rcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--orange)}
+.rclabel{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:16px}
+.rdisplay{font-family:var(--fd);font-size:72px;color:#fff;letter-spacing:2px;line-height:1}
+.rdisplay span{font-size:32px;color:var(--gray)}
+.rnote{font-size:13px;color:var(--gray);margin-top:8px}
+.rdiv{border:none;border-top:1px solid var(--gray-b);margin:24px 0}
+.rfeats{display:flex;flex-direction:column;gap:12px}
+.rfeat{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--gray-l)}
+.rfeat::before{content:'✓';display:flex;align-items:center;justify-content:center;width:20px;height:20px;background:rgba(240,90,0,.2);border-radius:50%;color:var(--orange);font-size:11px;flex-shrink:0}
+.fbadge{position:absolute;background:var(--charcoal-2);border:1px solid var(--gray-b);border-radius:var(--r);padding:12px 18px;font-size:13px}
+.fbadge.tr{top:-20px;right:-20px}
+.fbadge.bl{bottom:-20px;left:-20px}
+.fbadge .fn{font-family:var(--fd);font-size:24px;color:var(--orange);display:block}
+.fbadge .fl{font-size:11px;color:var(--gray);letter-spacing:1px}
+
+/* Stats bar */
+.sbar{background:var(--charcoal-2);border-top:1px solid var(--gray-b);border-bottom:1px solid var(--gray-b)}
+.sbi{max-width:1280px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(4,1fr)}
+.si{padding:32px 24px;border-right:1px solid var(--gray-b);text-align:center}
+.si:last-child{border-right:none}
+.snum{font-family:var(--fd);font-size:48px;letter-spacing:2px;color:var(--orange);display:block;line-height:1}
+.slbl{font-size:14px;color:var(--gray);margin-top:6px;letter-spacing:1px}
+
+/* Feature cards */
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.fc{background:var(--charcoal-2);border:1px solid var(--gray-b);border-radius:var(--rl);padding:32px;transition:border-color var(--t),transform var(--t)}
+.fc:hover{border-color:var(--orange);transform:translateY(-4px)}
+.ficon{width:52px;height:52px;background:rgba(240,90,0,.15);border-radius:var(--r);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:24px}
+.ftitle{font-family:var(--fd);font-size:22px;letter-spacing:1px;color:#fff;margin-bottom:12px}
+.fdesc{font-size:16px;color:var(--gray-l);line-height:1.6}
+
+/* Process steps */
+.psteps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px;position:relative}
+.psteps::before{content:'';position:absolute;top:32px;left:calc(12.5% + 24px);right:calc(12.5% + 24px);height:1px;background:var(--gray-b);z-index:0}
+.pstep{text-align:center;padding:0 20px;position:relative;z-index:1}
+.psnum{width:64px;height:64px;border-radius:50%;background:var(--charcoal-3);border:2px solid var(--gray-b);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:28px;color:var(--orange);margin:0 auto 20px;transition:border-color var(--t),background var(--t)}
+.pstep:hover .psnum{border-color:var(--orange);background:rgba(240,90,0,.1)}
+.pstitle{font-family:var(--fd);font-size:18px;letter-spacing:1px;color:#fff;margin-bottom:8px}
+.psdesc{font-size:15px;color:var(--gray);line-height:1.5}
+
+/* Testimonials */
+.tsec{background:var(--charcoal-2);border-top:1px solid var(--gray-b);border-bottom:1px solid var(--gray-b)}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.tcard{background:var(--charcoal-3);border:1px solid var(--gray-b);border-radius:var(--rl);padding:28px}
+.qm{font-size:64px;color:var(--orange);line-height:.5;margin-bottom:16px;opacity:.5;font-family:Georgia,serif}
+.ttext{font-size:16px;color:var(--gray-l);line-height:1.7;font-style:italic;margin-bottom:20px}
+.tauthor{display:flex;align-items:center;gap:12px}
+.tavatar{width:44px;height:44px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:18px;color:#fff;flex-shrink:0}
+.tname{font-weight:600;font-size:16px;color:#fff}
+.tloc{font-size:13px;color:var(--gray)}
+.stars{color:var(--orange);font-size:14px;margin-bottom:12px}
+
+/* CTA Banner */
+.ctab{background:linear-gradient(135deg,var(--orange-d),var(--orange),var(--orange-h));position:relative;overflow:hidden}
+.ctab::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E")}
+.ctabi{max-width:1280px;margin:0 auto;padding:80px 24px;display:flex;align-items:center;justify-content:space-between;gap:40px;position:relative;z-index:1}
+.ctabt .ct{font-family:var(--fd);font-size:clamp(32px,4vw,56px);letter-spacing:2px;color:#fff;margin-bottom:12px}
+.ctabt .cs{font-size:18px;color:rgba(255,255,255,.85)}
+.ctaba{display:flex;gap:16px;flex-shrink:0}
+
+/* =====================
+   ABOUT PAGE
+===================== */
+.ahero{background:var(--charcoal-2);border-bottom:1px solid var(--gray-b);padding:80px 0}
+.ahi{max-width:1280px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.aphoto{aspect-ratio:3/4;background:var(--charcoal-3);border:1px solid var(--gray-b);border-radius:var(--rl);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--gray);font-size:48px;position:relative;overflow:hidden;max-height:500px}
+.aphoto::before{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:var(--orange)}
+.aphoto .apl{font-size:14px;color:var(--gray);letter-spacing:1px}
+.abio h1{font-family:var(--fd);font-size:clamp(40px,5vw,68px);letter-spacing:2px;line-height:1;margin-bottom:8px}
+.abio .ttag{font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:24px}
+.abio p{color:var(--gray-l);line-height:1.8;margin-bottom:16px;font-size:17px}
+.bbadges{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.bbadge{background:var(--charcoal-3);border:1px solid var(--gray-b);padding:8px 16px;border-radius:20px;font-size:13px;color:var(--gray-l)}
+.vgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
+.vcard{background:var(--charcoal-2);border:1px solid var(--gray-b);border-left:3px solid var(--orange);border-radius:0 var(--r) var(--r) 0;padding:28px}
+.vtitle{font-family:var(--fd);font-size:20px;letter-spacing:1px;color:#fff;margin-bottom:8px}
+.vdesc{font-size:15px;color:var(--gray-l);line-height:1.6}
+.esec{background:var(--charcoal-2);border-top:1px solid var(--gray-b)}
+.ei{max-width:1280px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.eld{background:var(--charcoal-3);border:1px solid var(--gray-b);border-radius:var(--rl);padding:48px;text-align:center}
+.eld .lt{font-family:var(--fd);font-size:64px;letter-spacing:6px;color:var(--orange)}
+.eld .ls{font-size:14px;letter-spacing:4px;color:var(--gray);text-transform:uppercase;margin-top:8px}
+
+/* =====================
+   PRODUCTS PAGE
+===================== */
+.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
+.pcard{background:var(--charcoal-2);border:1px solid var(--gray-b);border-radius:var(--rl);overflow:hidden;transition:border-color var(--t)}
+.pcard:hover{border-color:rgba(240,90,0,.4)}
+.phead{padding:28px 28px 20px;display:flex;align-items:flex-start;gap:16px;cursor:pointer}
+.pico{width:52px;height:52px;background:rgba(240,90,0,.15);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.pinfo{flex:1}
+.ptitle{font-family:var(--fd);font-size:22px;letter-spacing:1px;color:#fff;margin-bottom:6px}
+.pbrief{font-size:15px;color:var(--gray-l);line-height:1.5}
+.pexpbtn{background:none;border:1px solid var(--gray-b);color:var(--gray);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all var(--t);flex-shrink:0;align-self:center}
+.pcard.exp .pexpbtn{background:var(--orange);border-color:var(--orange);color:#fff;transform:rotate(45deg)}
+.pdet{display:none;border-top:1px solid var(--gray-b)}
+.pcard.exp .pdet{display:block}
+.pdeti{padding:28px}
+.phl{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:24px}
+.phi{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--gray-l)}
+.phi::before{content:'→';color:var(--orange);font-size:13px;flex-shrink:0}
+.pdesc{font-size:15px;color:var(--gray-l);line-height:1.7;margin-bottom:24px}
+.pvid{background:var(--charcoal-3);border:1px solid var(--gray-b);border-radius:var(--r);aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;margin-bottom:24px;transition:border-color var(--t)}
+.pvid:hover{border-color:var(--orange)}
+.play{width:64px;height:64px;background:rgba(240,90,0,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;padding-left:4px;transition:transform var(--t)}
+.pvid:hover .play{transform:scale(1.1)}
+.vlbl{font-size:13px;color:var(--gray);letter-spacing:2px;text-transform:uppercase}
+.pctarow{display:flex;gap:12px}
+
+/* =====================
+   CALCULATOR PAGE
+===================== */
+.ctabs{display:flex;gap:4px;margin-bottom:40px;background:var(--charcoal-2);border:1px solid var(--gray-b);border-radius:var(--rl);padding:6px;width:fit-content}
+.ctab{font-family:var(--fd);font-size:16px;letter-spacing:1.5px;background:none;border:none;color:var(--gray);padding:12px 28px;border-radius:var(--r);cursor:pointer;transition:all var(--t)}
+.ctab.active{background:var(--orange);color:#fff}
+.cpanel{display:none}
+.cpanel.active{display:block}
+.clayout{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.cform{background:var(--charcoal-2);border:1px solid var(--gray-b);border-radius:var(--rl);padding:32px}
+.cform h3{font-family:var(--fd);font-size:24px;letter-spacing:1px;color:#fff;margin-bottom:28px}
+.fg{margin-bottom:20px}
+.fl{display:block;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:8px}
+.fi{width:100%;background:var(--charcoal-3);border:1px solid var(--gray-b);border-radius:var(--r);padding:12px 16px;font-family:var(--fb);font-size:17px;color:#fff;transition:border-color var(--t);-webkit-appearance:none;appearance:none}
+.fi:focus{outline:none;border-color:var(--orange)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cres{display:flex;flex-direction:column;gap:24px}
+.resc{background:var(--charcoal-2);border:1px solid var(--gray-b);border-radius:var(--rl);padding:28px}
+.resc h3{font-family:var(--fd);font-size:20px;letter-spacing:1px;color:#fff;margin-bottom:20px}
+.mtotal{text-align:center;padding:24px;background:var(--charcoal-3);border-radius:var(--r);margin-bottom:20px}
+.mamt{font-family:var(--fd);font-size:56px;letter-spacing:2px;color:var(--orange);display:block;line-height:1}
+.mlbl{font-size:13px;color:var(--gray);text-transform:uppercase;letter-spacing:2px;margin-top:6px}
+.bklist{display:flex;flex-direction:column}
+.bki{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--gray-b);font-size:16px}
+.bki:last-child{border-bottom:none}
+.bki .il{color:var(--gray-l)}
+.bki .iv{font-weight:600;color:#fff}
+.bki.tot{font-size:18px}
+.bki.tot .il{color:#fff;font-weight:700}
+.bki.tot .iv{color:var(--orange)}
+.donut-wrap{display:flex;justify-content:center;margin-bottom:20px}
+/* Amortization */
+.amort{margin-top:40px}
+.amort h3{font-family:var(--fd);font-size:28px;letter-spacing:1px;margin-bottom:20px}
+.asum{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.astat{background:var(--charcoal-2);border:1px solid var(--gray-b);border-radius:var(--r);padding:20px;text-align:center}
+.astat .an{font-family:var(--fd);font-size:28px;color:var(--orange);letter-spacing:1px;display:block}
+.astat .al{font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.twrap{overflow-x:auto;border:1px solid var(--gray-b);border-radius:var(--rl)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+thead th{background:var(--charcoal-3);color:var(--gray);font-family:var(--fb);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:14px 16px;text-align:right}
+thead th:first-child{text-align:left}
+tbody tr{border-top:1px solid var(--gray-b);transition:background var(--t)}
+tbody tr:hover{background:var(--charcoal-3)}
+tbody td{padding:12px 16px;color:var(--gray-l);text-align:right}
+tbody td:first-child{text-align:left;color:#fff;font-weight:500}
+.smb{width:100%;padding:14px;background:var(--charcoal-2);border:1px solid var(--gray-b);border-top:none;color:var(--orange);font-family:var(--fd);font-size:15px;letter-spacing:1px;cursor:pointer;transition:background var(--t);border-radius:0 0 var(--rl) var(--rl)}
+.smb:hover{background:var(--charcoal-3)}
+/* Rent vs Buy */
+.rvbc{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.rvbcard{background:var(--charcoal-3);border:1px solid var(--gray-b);border-radius:var(--r);padding:24px;text-align:center}
+.rvbcard.winner{border-color:var(--orange)}
+.rvbcard .rl{font-family:var(--fd);font-size:20px;letter-spacing:1px;margin-bottom:8px}
+.rvbcard .ra{font-family:var(--fd);font-size:36px;color:var(--orange);letter-spacing:1px}
+.rvbcard .rs{font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.rvbv{background:rgba(240,90,0,.1);border:1px solid rgba(240,90,0,.3);border-radius:var(--r);padding:16px 20px;font-size:16px;color:var(--orange);text-align:center;margin-top:16px}
+/* =====================
+   BLOG PAGE
+===================== */
+.bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.bcard{background:var(--charcoal-2);border:1px solid var(--gray-b);border-radius:var(--rl);overflow:hidden;transition:border-color var(--t),transform var(--t);cursor:pointer}
+.bcard:hover{border-color:rgba(240,90,0,.4);transform:translateY(-4px)}
+.bimg{height:200px;display:flex;align-items:center;justify-content:center;font-size:48px;border-bottom:1px solid var(--gray-b);position:relative;overflow:hidden}
+.bimg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,var(--charcoal-2))}
+.bcat{position:absolute;top:12px;left:12px;background:var(--orange);color:#fff;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:2px;z-index:1}
+.bbody{padding:24px}
+.bdate{font-size:12px;color:var(--gray);letter-spacing:1px;margin-bottom:10px}
+.btitle{font-family:var(--fd);font-size:20px;letter-spacing:1px;color:#fff;margin-bottom:12px;line-height:1.2}
+.bexc{font-size:15px;color:var(--gray-l);line-height:1.6;margin-bottom:16px}
+.brm{font-size:14px;color:var(--orange);display:inline-flex;align-items:center;gap:6px;transition:gap var(--t)}
+.brm:hover{gap:10px}
+/* =====================
+   VIDEOS PAGE
+===================== */
+.vgrid2{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.vidc{background:var(--charcoal-2);border:1px solid var(--gray-b);border-radius:var(--rl);overflow:hidden;transition:border-color var(--t),transform var(--t)}
+.vidc:hover{border-color:rgba(240,90,0,.4);transform:translateY(-4px)}
+.vthumb{aspect-ratio:16/9;background:var(--charcoal-3);display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;border-bottom:1px solid var(--gray-b)}
+.vplaybtn{width:56px;height:56px;background:rgba(240,90,0,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;padding-left:4px;transition:transform var(--t);z-index:1}
+.vidc:hover .vplaybtn{transform:scale(1.1)}
+.vdur{position:absolute;bottom:8px;right:10px;background:rgba(0,0,0,.8);color:#fff;font-size:12px;padding:2px 6px;border-radius:2px}
+.vinfo{padding:20px}
+.vtag{font-size:11px;color:var(--orange);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.vtitle2{font-family:var(--fd);font-size:18px;letter-spacing:1px;color:#fff;margin-bottom:8px}
+.vdesc2{font-size:14px;color:var(--gray);line-height:1.5}
+/* =====================
+   CONTACT PAGE
+===================== */
+.clayout2{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:48px}
+.cfw{background:var(--charcoal-2);border:1px solid var(--gray-b);border-radius:var(--rl);padding:40px}
+.cfw h3{font-family:var(--fd);font-size:28px;letter-spacing:1px;margin-bottom:28px}
+.cfg{margin-bottom:20px}
+.cfg label{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:8px}
+.cfg input,.cfg select,.cfg textarea{width:100%;background:var(--charcoal-3);border:1px solid var(--gray-b);border-radius:var(--r);padding:12px 16px;font-family:var(--fb);font-size:17px;color:#fff;transition:border-color var(--t);resize:vertical}
+.cfg select option{background:var(--charcoal-3)}
+.cfg input:focus,.cfg select:focus,.cfg textarea:focus{outline:none;border-color:var(--orange)}
+.cfg textarea{min-height:120px}
+.fsucc{background:rgba(76,175,80,.1);border:1px solid rgba(76,175,80,.3);border-radius:var(--r);padding:16px 20px;font-size:16px;color:#4caf50;text-align:center;display:none;margin-top:16px}
+.cblock{display:flex;flex-direction:column;gap:24px;margin-bottom:40px}
+.citem{display:flex;gap:16px;align-items:flex-start}
+.cico{width:48px;height:48px;background:rgba(240,90,0,.15);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.cilbl{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.cival{font-size:17px;color:#fff}
+.cisub{font-size:14px;color:var(--gray)}
+.mapp{background:var(--charcoal-2);border:1px solid var(--gray-b);border-radius:var(--rl);height:220px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--gray);font-size:32px;position:relative;overflow:hidden}
+.mapp::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--gray-b) 1px,transparent 1px),linear-gradient(90deg,var(--gray-b) 1px,transparent 1px);background-size:30px 30px;opacity:.4}
+.mapp .maplbl{font-size:14px;color:var(--gray);letter-spacing:1px;position:relative;z-index:1}
+.mappin{position:relative;z-index:1;color:var(--orange)}
+/* =====================
+   FOOTER
+===================== */
+footer{background:#111;border-top:1px solid var(--gray-b)}
+.ftop{max-width:1280px;margin:0 auto;padding:60px 24px 40px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px}
+.flogo{font-family:var(--fd);font-size:26px;letter-spacing:2px;color:#fff;line-height:1}
+.flogos{font-size:11px;letter-spacing:3px;color:var(--orange);text-transform:uppercase;margin-bottom:16px;margin-top:2px}
+.ftag{font-size:15px;color:var(--gray);line-height:1.6;max-width:280px}
+.fsoc{display:flex;gap:10px;margin-top:20px}
+.slink{width:38px;height:38px;background:var(--charcoal-3);border:1px solid var(--gray-b);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gray);transition:all var(--t)}
+.slink:hover{background:var(--orange);border-color:var(--orange);color:#fff}
+.fcol h4{font-family:var(--fd);font-size:16px;letter-spacing:2px;color:#fff;margin-bottom:16px}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.fcol ul li a{font-size:15px;color:var(--gray);text-decoration:none;transition:color var(--t)}
+.fcol ul li a:hover{color:var(--orange)}
+.fbot{border-top:1px solid var(--gray-b);max-width:1280px;margin:0 auto;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--gray)}
+.fbot a{color:var(--gray);text-decoration:none}
+.fbot a:hover{color:var(--orange)}
+.fdisc{max-width:1280px;margin:0 auto;padding:20px 24px 24px;font-size:12px;color:var(--gray);line-height:1.6;border-top:1px solid var(--gray-b)}
+
+/* =====================
+   RESPONSIVE
+===================== */
+@media(max-width:1024px){
+  .hcont{grid-template-columns:1fr}
+  .hvisual{display:none}
+  .sbi{grid-template-columns:repeat(2,1fr)}
+  .si:nth-child(2){border-right:none}
+  .fgrid{grid-template-columns:repeat(2,1fr)}
+  .psteps{grid-template-columns:repeat(2,1fr);gap:24px}
+  .psteps::before{display:none}
+  .tgrid{grid-template-columns:repeat(2,1fr)}
+  .ctabi{flex-direction:column;text-align:center}
+  .ahi{grid-template-columns:1fr}
+  .aphoto{max-height:300px;aspect-ratio:auto}
+  .ei{grid-template-columns:1fr}
+  .pgrid{grid-template-columns:1fr}
+  .clayout{grid-template-columns:1fr}
+  .bgrid{grid-template-columns:repeat(2,1fr)}
+  .vgrid2{grid-template-columns:repeat(2,1fr)}
+  .clayout2{grid-template-columns:1fr}
+  .ftop{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nlinks{display:none}
+  .ham{display:flex}
+  .fgrid{grid-template-columns:1fr}
+  .psteps{grid-template-columns:1fr}
+  .tgrid{grid-template-columns:1fr}
+  .bgrid{grid-template-columns:1fr}
+  .vgrid2{grid-template-columns:1fr}
+  .vgrid{grid-template-columns:1fr}
+  .asum{grid-template-columns:1fr}
+  .rvbc{grid-template-columns:1fr}
+  .ftop{grid-template-columns:1fr}
+  .fbot{flex-direction:column;gap:8px;text-align:center}
+  .phl{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr}
+  .sbi{grid-template-columns:repeat(2,1fr)}
+  body{cursor:default}
+  #cd,#cr{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cd"></div>
+<div id="cr"></div>
+
+<!-- Back to Top -->
+<button id="btt" aria-label="Back to top">↑</button>
+
+<!-- Market Ticker -->
+<div id="ticker">
+  <div class="tl">LIVE MARKET</div>
+  <div style="overflow:hidden;flex:1">
+    <div class="tt" id="tt"></div>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="ni">
+    <div class="nl" onclick="nav('home')">
+      <span class="bm">THE KHAMIS TEAM</span>
+      <span class="bs">EPiQ Lending · Tempe, AZ</span>
+    </div>
+    <ul class="nlinks" id="nlinks">
+      <li><a href="#" data-p="home" class="active" onclick="nav('home');return false">HOME</a></li>
+      <li><a href="#" data-p="about" onclick="nav('about');return false">ABOUT</a></li>
+      <li><a href="#" data-p="products" onclick="nav('products');return false">PRODUCTS</a></li>
+      <li><a href="#" data-p="calculator" onclick="nav('calculator');return false">CALCULATOR</a></li>
+      <li><a href="#" data-p="blog" onclick="nav('blog');return false">BLOG</a></li>
+      <li><a href="#" data-p="videos" onclick="nav('videos');return false">VIDEOS</a></li>
+      <li><a href="#" data-p="contact" class="ncta" onclick="nav('contact');return false">GET STARTED</a></li>
+    </ul>
+    <button class="ham" id="ham" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mm" id="mm">
+  <button class="mmc" onclick="toggleMenu()">✕</button>
+  <a href="#" onclick="nav('home');toggleMenu();return false">HOME</a>
+  <a href="#" onclick="nav('about');toggleMenu();return false">ABOUT</a>
+  <a href="#" onclick="nav('products');toggleMenu();return false">PRODUCTS</a>
+  <a href="#" onclick="nav('calculator');toggleMenu();return false">CALCULATOR</a>
+  <a href="#" onclick="nav('blog');toggleMenu();return false">BLOG</a>
+  <a href="#" onclick="nav('videos');toggleMenu();return false">VIDEOS</a>
+  <a href="#" onclick="nav('contact');toggleMenu();return false">CONTACT</a>
+</div>
+
+<!-- ======== HOME ======== -->
+<section id="page-home" class="page active">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hbg"></div>
+    <div class="hgrid"></div>
+    <div class="hcont">
+      <div class="htext">
+        <div class="hbadge">Licensed Mortgage Broker · NMLS #XXXXXXX</div>
+        <h1 class="htitle">YOUR<br><span>DREAM HOME</span><br>STARTS HERE</h1>
+        <p class="hdesc">Expert mortgage guidance for every stage of your homeownership journey. Serving Tempe, Phoenix, and the greater Arizona market with competitive rates and personal service.</p>
+        <div class="hactions">
+          <a class="btn btn-p" href="#" onclick="nav('calculator');return false">▶ RUN THE NUMBERS</a>
+          <a class="btn btn-s" href="#" onclick="nav('contact');return false">SPEAK WITH DRAKE</a>
+        </div>
+        <div class="hstats">
+          <div class="hstat"><span class="n">$250M+</span><span class="l">Loans Closed</span></div>
+          <div class="hstat"><span class="n">500+</span><span class="l">Families Helped</span></div>
+          <div class="hstat"><span class="n">4.9★</span><span class="l">Client Rating</span></div>
+        </div>
+      </div>
+      <div class="hvisual">
+        <div class="rcard" style="position:relative">
+          <div class="rclabel">TODAY'S FEATURED RATE</div>
+          <div class="rdisplay">6.75<span>%</span></div>
+          <div class="rnote">30-Year Fixed · As low as · Subject to qualification</div>
+          <hr class="rdiv">
+          <div class="rfeats">
+            <div class="rfeat">No hidden fees — transparent pricing</div>
+            <div class="rfeat">Pre-approval in as little as 24 hours</div>
+            <div class="rfeat">FHA, VA, Conventional &amp; Jumbo programs</div>
+            <div class="rfeat">Local expertise in Tempe &amp; Greater Phoenix</div>
+            <div class="rfeat">Close in as few as 21 days</div>
+          </div>
+          <div class="fbadge tr"><span class="fn">21</span><span class="fl">Day Close</span></div>
+          <div class="fbadge bl"><span class="fn">A+</span><span class="fl">BBB Rating</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="sbar">
+    <div class="sbi">
+      <div class="si rv"><span class="snum">$250M+</span><div class="slbl">Total Volume Closed</div></div>
+      <div class="si rv"><span class="snum">500+</span><div class="slbl">Families Served</div></div>
+      <div class="si rv"><span class="snum">15+</span><div class="slbl">Lender Partners</div></div>
+      <div class="si rv"><span class="snum">4.9★</span><div class="slbl">Average Review</div></div>
+    </div>
+  </div>
+
+  <!-- Why Drake -->
+  <div class="sec">
+    <div class="rv">
+      <div class="slabel">WHY WORK WITH US</div>
+      <h2 class="stitle">THE KHAMIS<br>DIFFERENCE</h2>
+      <div class="div"></div>
+      <p class="ssub">As your mortgage broker, I shop dozens of lenders to find the loan that fits your life — not just the easiest approval.</p>
+    </div>
+    <div class="fgrid">
+      <div class="fc rv"><div class="ficon">🏦</div><div class="ftitle">BROKER ADVANTAGE</div><p class="fdesc">Access to 15+ wholesale lenders means more programs, better rates, and options you won't find at a single bank.</p></div>
+      <div class="fc rv"><div class="ficon">⚡</div><div class="ftitle">FAST CLOSINGS</div><p class="fdesc">Streamlined process with local knowledge. Most loans close in 21–30 days. Your timeline is our priority.</p></div>
+      <div class="fc rv"><div class="ficon">🤝</div><div class="ftitle">PERSONAL SERVICE</div><p class="fdesc">You deal directly with Drake — not a call center. One point of contact from application through closing.</p></div>
+      <div class="fc rv"><div class="ficon">📊</div><div class="ftitle">RATE TRANSPARENCY</div><p class="fdesc">Side-by-side loan comparisons. No hidden fees, no surprises at closing. Know exactly what you're getting.</p></div>
+      <div class="fc rv"><div class="ficon">🏠</div><div class="ftitle">LOCAL EXPERTISE</div><p class="fdesc">Deep knowledge of the Tempe, Scottsdale, Mesa, and greater Phoenix real estate market since 2015.</p></div>
+      <div class="fc rv"><div class="ficon">📱</div><div class="ftitle">DIGITAL-FIRST</div><p class="fdesc">Apply online, upload docs from your phone, e-sign — or meet in person. Your process, your way.</p></div>
+    </div>
+  </div>
+
+  <!-- Process -->
+  <div style="background:var(--charcoal-2);border-top:1px solid var(--gray-b);border-bottom:1px solid var(--gray-b)">
+    <div class="sec">
+      <div class="rv" style="text-align:center">
+        <div class="slabel">HOW IT WORKS</div>
+        <h2 class="stitle">SIMPLE PROCESS,<br><span style="color:var(--orange)">CLEAR PATH</span></h2>
+        <div class="div" style="margin:20px auto"></div>
+      </div>
+      <div class="psteps">
+        <div class="pstep rv"><div class="psnum">1</div><div class="pstitle">APPLY ONLINE</div><p class="psdesc">Complete a quick 10-minute application from your phone or computer. No SSN required to start.</p></div>
+        <div class="pstep rv"><div class="psnum">2</div><div class="pstitle">GET PRE-APPROVED</div><p class="psdesc">We review your file and issue a pre-approval letter — typically within 24 hours. Shop with confidence.</p></div>
+        <div class="pstep rv"><div class="psnum">3</div><div class="pstitle">FIND YOUR HOME</div><p class="psdesc">Work with your realtor knowing your numbers. We'll update the pre-approval as needed, instantly.</p></div>
+        <div class="pstep rv"><div class="psnum">4</div><div class="pstitle">CLOSE &amp; CELEBRATE</div><p class="psdesc">We handle lender underwriting, title coordination, and the final closing — you just show up and sign.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="tsec">
+    <div class="sec">
+      <div class="rv">
+        <div class="slabel">CLIENT STORIES</div>
+        <h2 class="stitle">WHAT OUR<br>CLIENTS SAY</h2>
+        <div class="div"></div>
+      </div>
+      <div class="tgrid">
+        <div class="tcard rv">
+          <div class="stars">★★★★★</div>
+          <div class="qm">"</div>
+          <p class="ttext">Drake made buying our first home in Tempe an absolute breeze. He explained every step, found us a rate we didn't think was possible, and we closed in 23 days. Incredible.</p>
+          <div class="tauthor"><div class="tavatar">JD</div><div><div class="tname">Jason &amp; Maria Delgado</div><div class="tloc">First-Time Buyers · Tempe, AZ</div></div></div>
+        </div>
+        <div class="tcard rv">
+          <div class="stars">★★★★★</div>
+          <div class="qm">"</div>
+          <p class="ttext">Refinanced through Drake and cut $420 off our monthly payment. The whole process took less than 3 weeks. He was available nights and weekends when we had questions.</p>
+          <div class="tauthor"><div class="tavatar">SR</div><div><div class="tname">Sarah Richardson</div><div class="tloc">Refinance · Scottsdale, AZ</div></div></div>
+        </div>
+        <div class="tcard rv">
+          <div class="stars">★★★★★</div>
+          <div class="qm">"</div>
+          <p class="ttext">As a veteran, I wanted someone who really knew VA loans. Drake got us a zero-down loan on a beautiful home in Mesa. He knew every detail of the process. Highly recommend.</p>
+          <div class="tauthor"><div class="tavatar">TN</div><div><div class="tname">Tyler &amp; Kim Nester</div><div class="tloc">VA Purchase · Mesa, AZ</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Banner -->
+  <div class="ctab">
+    <div class="ctabi">
+      <div class="ctabt">
+        <div class="ct">READY TO GET<br>YOUR KEYS?</div>
+        <p class="cs">Start with a free consultation — no obligation, no pressure.</p>
+      </div>
+      <div class="ctaba">
+        <a class="btn btn-w" href="#" onclick="nav('contact');return false">GET STARTED FREE</a>
+        <a class="btn btn-ow" href="#" onclick="nav('calculator');return false">RUN CALCULATOR</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ======== ABOUT ======== -->
+<section id="page-about" class="page">
+
+  <div class="ahero">
+    <div class="ahi">
+      <div class="aphoto">
+        <div style="font-size:80px">👤</div>
+        <div class="apl">PHOTO PLACEHOLDER</div>
+      </div>
+      <div class="abio">
+        <div class="slabel">MEET YOUR BROKER</div>
+        <h1>DRAKE<br>KHAMIS</h1>
+        <div class="ttag">Mortgage Broker · NMLS #XXXXXXX · EPiQ Lending</div>
+        <p>I'm Drake Khamis, a licensed mortgage broker based in Tempe, Arizona, and the founder of The Khamis Team at EPiQ Lending. My mission is simple: help Arizona families get into homes they love, at terms that make financial sense.</p>
+        <p>With years of experience in the Arizona market, I've closed hundreds of loans across Tempe, Phoenix, Scottsdale, Mesa, Chandler, and Gilbert. Whether you're buying your first home, upgrading, investing, or refinancing — I bring expertise, speed, and genuine care to every transaction.</p>
+        <p>Unlike big banks, I work as a broker — meaning I shop your loan to a network of wholesale lenders and find the product that truly fits your situation. My clients get better rates, more options, and someone who actually picks up the phone.</p>
+        <div class="bbadges">
+          <span class="bbadge">📍 Tempe, Arizona</span>
+          <span class="bbadge">🏦 EPiQ Lending</span>
+          <span class="bbadge">📋 NMLS Licensed</span>
+          <span class="bbadge">🏠 FHA Specialist</span>
+          <span class="bbadge">⭐ VA Loan Expert</span>
+          <span class="bbadge">🏆 Top Producer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="rv">
+      <div class="slabel">WHAT I BELIEVE</div>
+      <h2 class="stitle">CORE VALUES</h2>
+      <div class="div"></div>
+    </div>
+    <div class="vgrid">
+      <div class="vcard rv"><div class="vtitle">TRANSPARENCY FIRST</div><p class="vdesc">You deserve to know exactly what you're signing. I break down every fee, every rate, every option — in plain English, no exceptions.</p></div>
+      <div class="vcard rv"><div class="vtitle">CLIENT-CENTERED</div><p class="vdesc">Your financial goals drive every recommendation I make. I don't push products — I find solutions tailored to your life and budget.</p></div>
+      <div class="vcard rv"><div class="vtitle">SPEED &amp; EFFICIENCY</div><p class="vdesc">Time kills deals. I run a tight, digital-forward process to keep your transaction moving from pre-approval to clear to close.</p></div>
+      <div class="vcard rv"><div class="vtitle">COMMUNITY ROOTS</div><p class="vdesc">I live and work in the Valley. Supporting Arizona families isn't just business — it's personal. I'm invested in this community long-term.</p></div>
+    </div>
+  </div>
+
+  <div class="esec">
+    <div class="ei">
+      <div class="eld rv">
+        <div class="lt">EPiQ</div>
+        <div class="ls">LENDING</div>
+      </div>
+      <div class="rv">
+        <div class="slabel">OUR COMPANY</div>
+        <h2 class="stitle">EPIQ LENDING</h2>
+        <div class="div"></div>
+        <p style="color:var(--gray-l);line-height:1.8;margin-bottom:16px">EPiQ Lending is a licensed mortgage brokerage built on the principle that every borrower deserves access to exceptional loan products and unmatched service. Operating across Arizona, we partner with top wholesale lenders to deliver competitive programs to our clients.</p>
+        <p style="color:var(--gray-l);line-height:1.8;margin-bottom:32px">As an EPiQ broker, I have access to conventional, government, and specialty loan programs not available at retail banks — which translates directly into savings and options for you.</p>
+        <a class="btn btn-oo" href="#" onclick="nav('contact');return false">WORK WITH US</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ======== PRODUCTS ======== -->
+<section id="page-products" class="page">
+  <div class="sec">
+    <div class="rv" style="text-align:center;max-width:700px;margin:0 auto">
+      <div class="slabel">LOAN PROGRAMS</div>
+      <h2 class="stitle">FIND YOUR<br><span style="color:var(--orange)">PERFECT LOAN</span></h2>
+      <div class="div" style="margin:20px auto"></div>
+      <p class="ssub" style="margin:0 auto">From first-time buyer programs to jumbo financing, explore our full suite of mortgage products. Click any card to see full details.</p>
+    </div>
+    <div class="pgrid">
+
+      <!-- Conventional -->
+      <div class="pcard">
+        <div class="phead" onclick="toggleProd(this.closest('.pcard'))">
+          <div class="pico">🏠</div>
+          <div class="pinfo"><div class="ptitle">CONVENTIONAL LOANS</div><p class="pbrief">Fixed &amp; adjustable-rate loans with flexible terms. The most common mortgage product in America.</p></div>
+          <button class="pexpbtn">+</button>
+        </div>
+        <div class="pdet"><div class="pdeti">
+          <div class="phl">
+            <div class="phi">Down payment from 3%</div><div class="phi">15, 20, or 30-year terms</div>
+            <div class="phi">Fixed or adjustable rate</div><div class="phi">No upfront mortgage insurance</div>
+            <div class="phi">Cancel PMI at 80% LTV</div><div class="phi">Loans up to $766,550</div>
+          </div>
+          <p class="pdesc">Conventional loans are backed by Fannie Mae or Freddie Mac and offer the widest range of terms and flexibility. With good credit and a reasonable down payment, this is often the most cost-effective long-term choice. Unlike FHA, there's no upfront MIP and PMI can be removed once you have 20% equity.</p>
+          <div class="pvid"><div class="play">▶</div><div class="vlbl">Conventional Loan Overview — Video Coming Soon</div></div>
+          <div class="pctarow">
+            <a class="btn btn-p" href="#" onclick="nav('contact');return false">APPLY NOW</a>
+            <a class="btn btn-s" href="#" onclick="nav('calculator');return false">CALCULATE PAYMENT</a>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- FHA -->
+      <div class="pcard">
+        <div class="phead" onclick="toggleProd(this.closest('.pcard'))">
+          <div class="pico">🔑</div>
+          <div class="pinfo"><div class="ptitle">FHA LOANS</div><p class="pbrief">Government-backed loans designed for buyers with lower credit scores or smaller down payments.</p></div>
+          <button class="pexpbtn">+</button>
+        </div>
+        <div class="pdet"><div class="pdeti">
+          <div class="phl">
+            <div class="phi">Down payment from 3.5%</div><div class="phi">Credit scores from 580</div>
+            <div class="phi">Gift funds allowed</div><div class="phi">Higher DTI ratios accepted</div>
+            <div class="phi">FHA 203k rehab available</div><div class="phi">Streamline refinance option</div>
+          </div>
+          <p class="pdesc">FHA loans are insured by the Federal Housing Administration and are perfect for first-time homebuyers or those rebuilding credit. The lower down payment requirement and flexible credit standards make homeownership accessible when conventional financing may be out of reach. FHA loans come with both upfront and annual mortgage insurance premiums.</p>
+          <div class="pvid"><div class="play">▶</div><div class="vlbl">FHA Loan Explained — Video Coming Soon</div></div>
+          <div class="pctarow">
+            <a class="btn btn-p" href="#" onclick="nav('contact');return false">APPLY NOW</a>
+            <a class="btn btn-s" href="#" onclick="nav('calculator');return false">CALCULATE PAYMENT</a>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- VA -->
+      <div class="pcard">
+        <div class="phead" onclick="toggleProd(this.closest('.pcard'))">
+          <div class="pico">🎖️</div>
+          <div class="pinfo"><div class="ptitle">VA LOANS</div><p class="pbrief">Exclusive benefits for veterans, active duty service members, and eligible surviving spouses.</p></div>
+          <button class="pexpbtn">+</button>
+        </div>
+        <div class="pdet"><div class="pdeti">
+          <div class="phl">
+            <div class="phi">Zero down payment required</div><div class="phi">No private mortgage insurance</div>
+            <div class="phi">Competitive interest rates</div><div class="phi">Seller can pay all closing costs</div>
+            <div class="phi">VA IRRRL streamline refi</div><div class="phi">Multiple VA uses available</div>
+          </div>
+          <p class="pdesc">VA home loans are one of the most powerful benefits available to those who have served. With no down payment, no PMI, and competitive rates, a VA loan can save you tens of thousands over the life of your loan compared to conventional financing. As a VA loan specialist, Drake guides veterans through the COE process and ensures you get every benefit you've earned.</p>
+          <div class="pvid"><div class="play">▶</div><div class="vlbl">VA Loan Benefits — Video Coming Soon</div></div>
+          <div class="pctarow">
+            <a class="btn btn-p" href="#" onclick="nav('contact');return false">APPLY NOW</a>
+            <a class="btn btn-s" href="#" onclick="nav('calculator');return false">CALCULATE PAYMENT</a>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- Jumbo -->
+      <div class="pcard">
+        <div class="phead" onclick="toggleProd(this.closest('.pcard'))">
+          <div class="pico">🏰</div>
+          <div class="pinfo"><div class="ptitle">JUMBO LOANS</div><p class="pbrief">Finance luxury and high-value properties that exceed conventional conforming loan limits.</p></div>
+          <button class="pexpbtn">+</button>
+        </div>
+        <div class="pdet"><div class="pdeti">
+          <div class="phl">
+            <div class="phi">Loan amounts $766,551+</div><div class="phi">Competitive jumbo rates</div>
+            <div class="phi">Fixed &amp; ARM options</div><div class="phi">Interest-only options available</div>
+            <div class="phi">Primary &amp; second homes</div><div class="phi">Investor properties available</div>
+          </div>
+          <p class="pdesc">Jumbo loans are required when your loan amount exceeds the Fannie Mae/Freddie Mac conforming limit of $766,550. These loans have stricter qualification requirements including higher credit scores, lower DTI ratios, and larger reserves — but they allow you to finance the luxury Arizona properties that conventional programs can't cover.</p>
+          <div class="pvid"><div class="play">▶</div><div class="vlbl">Jumbo Loan Guide — Video Coming Soon</div></div>
+          <div class="pctarow">
+            <a class="btn btn-p" href="#" onclick="nav('contact');return false">APPLY NOW</a>
+            <a class="btn btn-s" href="#" onclick="nav('calculator');return false">CALCULATE PAYMENT</a>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- USDA -->
+      <div class="pcard">
+        <div class="phead" onclick="toggleProd(this.closest('.pcard'))">
+          <div class="pico">🌾</div>
+          <div class="pinfo"><div class="ptitle">USDA LOANS</div><p class="pbrief">100% financing for eligible rural and suburban properties in designated USDA zones.</p></div>
+          <button class="pexpbtn">+</button>
+        </div>
+        <div class="pdet"><div class="pdeti">
+          <div class="phl">
+            <div class="phi">Zero down payment</div><div class="phi">Low mortgage insurance rates</div>
+            <div class="phi">Competitive interest rates</div><div class="phi">Eligible suburban areas in AZ</div>
+            <div class="phi">Income limits apply</div><div class="phi">Primary residence only</div>
+          </div>
+          <p class="pdesc">USDA Rural Development loans offer 100% financing with no down payment for eligible properties in designated rural and suburban areas. Many parts of greater Phoenix qualify — including areas in Maricopa and Pinal counties. USDA loans have income limits and property eligibility requirements, but for those who qualify, they represent one of the best financing options available.</p>
+          <div class="pvid"><div class="play">▶</div><div class="vlbl">USDA Loan Overview — Video Coming Soon</div></div>
+          <div class="pctarow">
+            <a class="btn btn-p" href="#" onclick="nav('contact');return false">CHECK ELIGIBILITY</a>
+            <a class="btn btn-s" href="#" onclick="nav('calculator');return false">CALCULATE PAYMENT</a>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- Refinance -->
+      <div class="pcard">
+        <div class="phead" onclick="toggleProd(this.closest('.pcard'))">
+          <div class="pico">🔄</div>
+          <div class="pinfo"><div class="ptitle">REFINANCE</div><p class="pbrief">Lower your rate, reduce your payment, or pull cash from your home's equity.</p></div>
+          <button class="pexpbtn">+</button>
+        </div>
+        <div class="pdet"><div class="pdeti">
+          <div class="phl">
+            <div class="phi">Rate &amp; term refinance</div><div class="phi">Cash-out up to 80% LTV</div>
+            <div class="phi">FHA &amp; VA streamline options</div><div class="phi">Shorten your loan term</div>
+            <div class="phi">Remove PMI/MIP</div><div class="phi">Debt consolidation options</div>
+          </div>
+          <p class="pdesc">Refinancing can save you thousands over the life of your loan or put cash in your pocket from home equity you've built. Whether you're looking to lower your rate, switch from ARM to fixed, shorten your term, or access cash for home improvements or debt payoff — Drake will run a full break-even analysis to make sure refinancing truly makes sense for your situation.</p>
+          <div class="pvid"><div class="play">▶</div><div class="vlbl">Should You Refinance? — Video Coming Soon</div></div>
+          <div class="pctarow">
+            <a class="btn btn-p" href="#" onclick="nav('contact');return false">GET REFI QUOTE</a>
+            <a class="btn btn-s" href="#" onclick="nav('calculator');return false">CALCULATE SAVINGS</a>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- HELOC -->
+      <div class="pcard">
+        <div class="phead" onclick="toggleProd(this.closest('.pcard'))">
+          <div class="pico">💳</div>
+          <div class="pinfo"><div class="ptitle">HELOC</div><p class="pbrief">A revolving line of credit secured by your home equity. Use it when you need it.</p></div>
+          <button class="pexpbtn">+</button>
+        </div>
+        <div class="pdet"><div class="pdeti">
+          <div class="phl">
+            <div class="phi">Access up to 90% CLTV</div><div class="phi">Revolving draw period</div>
+            <div class="phi">Interest-only payment option</div><div class="phi">Variable or fixed rate options</div>
+            <div class="phi">Use for any purpose</div><div class="phi">Low closing costs</div>
+          </div>
+          <p class="pdesc">A Home Equity Line of Credit (HELOC) gives you access to a revolving credit line based on your home's equity. It's ideal for home improvements, education costs, or as an emergency fund. You draw what you need, when you need it, and only pay interest on what you've used. Arizona homeowners who've seen strong appreciation in recent years are in an excellent position to leverage their equity.</p>
+          <div class="pvid"><div class="play">▶</div><div class="vlbl">HELOC Explained — Video Coming Soon</div></div>
+          <div class="pctarow">
+            <a class="btn btn-p" href="#" onclick="nav('contact');return false">EXPLORE HELOC</a>
+            <a class="btn btn-s" href="#" onclick="nav('contact');return false">ASK A QUESTION</a>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- Investment -->
+      <div class="pcard">
+        <div class="phead" onclick="toggleProd(this.closest('.pcard'))">
+          <div class="pico">📈</div>
+          <div class="pinfo"><div class="ptitle">INVESTMENT &amp; FIX-FLIP</div><p class="pbrief">DSCR loans, hard money, and investment property financing for real estate investors.</p></div>
+          <button class="pexpbtn">+</button>
+        </div>
+        <div class="pdet"><div class="pdeti">
+          <div class="phl">
+            <div class="phi">DSCR investor loans</div><div class="phi">No income verification options</div>
+            <div class="phi">1–4 unit investment properties</div><div class="phi">Short-term rental eligible</div>
+            <div class="phi">Fix &amp; flip bridge loans</div><div class="phi">Multi-family up to 4 units</div>
+          </div>
+          <p class="pdesc">Building a real estate portfolio in the Phoenix metro? DSCR (Debt Service Coverage Ratio) loans qualify based on the property's rental income rather than your personal income — perfect for self-employed investors or those with multiple properties. We also offer bridge financing for fix-and-flip projects with fast closings and flexible terms.</p>
+          <div class="pvid"><div class="play">▶</div><div class="vlbl">Investor Loan Strategies — Video Coming Soon</div></div>
+          <div class="pctarow">
+            <a class="btn btn-p" href="#" onclick="nav('contact');return false">INVESTOR INQUIRY</a>
+            <a class="btn btn-s" href="#" onclick="nav('calculator');return false">RUN NUMBERS</a>
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======== CALCULATOR ======== -->
+<section id="page-calculator" class="page">
+  <div class="sec">
+    <div class="rv">
+      <div class="slabel">MORTGAGE TOOLS</div>
+      <h2 class="stitle">PAYMENT<br><span style="color:var(--orange)">CALCULATORS</span></h2>
+      <div class="div"></div>
+    </div>
+
+    <div class="ctabs">
+      <button class="ctab active" onclick="switchTab('piti',this)">PITI CALCULATOR</button>
+      <button class="ctab" onclick="switchTab('rvb',this)">RENT VS BUY</button>
+    </div>
+
+    <!-- PITI Panel -->
+    <div class="cpanel active" id="calc-piti">
+      <div class="clayout">
+        <div class="cform">
+          <h3>LOAN DETAILS</h3>
+          <div class="fg"><label class="fl">Home Price</label><input type="number" class="fi" id="hp" value="450000" oninput="calcPITI()"></div>
+          <div class="frow">
+            <div class="fg"><label class="fl">Down Payment ($)</label><input type="number" class="fi" id="dp" value="90000" oninput="syncDP()"></div>
+            <div class="fg"><label class="fl">Down Payment (%)</label><input type="number" class="fi" id="dpp" value="20" step="0.5" oninput="syncDPP()"></div>
+          </div>
+          <div class="frow">
+            <div class="fg"><label class="fl">Interest Rate (%)</label><input type="number" class="fi" id="ir" value="6.75" step="0.125" oninput="calcPITI()"></div>
+            <div class="fg"><label class="fl">Loan Term</label>
+              <select class="fi" id="lt" onchange="calcPITI()">
+                <option value="30" selected>30 Years</option>
+                <option value="20">20 Years</option>
+                <option value="15">15 Years</option>
+                <option value="10">10 Years</option>
+              </select>
+            </div>
+          </div>
+          <div class="frow">
+            <div class="fg"><label class="fl">Annual Property Tax (%)</label><input type="number" class="fi" id="pt" value="0.7" step="0.1" oninput="calcPITI()"></div>
+            <div class="fg"><label class="fl">Annual Insurance ($)</label><input type="number" class="fi" id="ins" value="1800" oninput="calcPITI()"></div>
+          </div>
+          <div class="frow">
+            <div class="fg"><label class="fl">HOA / Month ($)</label><input type="number" class="fi" id="hoa" value="0" oninput="calcPITI()"></div>
+            <div class="fg"><label class="fl">PMI Rate (%/yr)</label><input type="number" class="fi" id="pmi" value="0.5" step="0.1" oninput="calcPITI()"></div>
+          </div>
+        </div>
+        <div class="cres">
+          <div class="resc">
+            <h3>MONTHLY PAYMENT</h3>
+            <div class="mtotal"><span class="mamt" id="total-pmt">$—</span><div class="mlbl">TOTAL MONTHLY PITI + FEES</div></div>
+            <div class="donut-wrap"><canvas id="donut" width="160" height="160"></canvas></div>
+            <div class="bklist">
+              <div class="bki"><span class="il">● Principal &amp; Interest</span><span class="iv" id="r-pi">—</span></div>
+              <div class="bki"><span class="il">● Property Taxes</span><span class="iv" id="r-tax">—</span></div>
+              <div class="bki"><span class="il">● Homeowner's Insurance</span><span class="iv" id="r-ins">—</span></div>
+              <div class="bki"><span class="il">● PMI</span><span class="iv" id="r-pmi">—</span></div>
+              <div class="bki"><span class="il">● HOA</span><span class="iv" id="r-hoa">—</span></div>
+              <div class="bki tot"><span class="il">TOTAL / MONTH</span><span class="iv" id="r-tot">—</span></div>
+            </div>
+          </div>
+          <div class="resc">
+            <h3>LOAN SUMMARY</h3>
+            <div class="bklist">
+              <div class="bki"><span class="il">Loan Amount</span><span class="iv" id="r-loan">—</span></div>
+              <div class="bki"><span class="il">Total Interest Paid</span><span class="iv" id="r-tint">—</span></div>
+              <div class="bki"><span class="il">Total Cost of Loan</span><span class="iv" id="r-tcost">—</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Amortization -->
+      <div class="amort">
+        <h3>AMORTIZATION SCHEDULE</h3>
+        <div class="asum">
+          <div class="astat"><span class="an" id="a-loan">—</span><div class="al">Loan Amount</div></div>
+          <div class="astat"><span class="an" id="a-int">—</span><div class="al">Total Interest</div></div>
+          <div class="astat"><span class="an" id="a-tot">—</span><div class="al">Total Payments</div></div>
+        </div>
+        <div class="twrap">
+          <table>
+            <thead><tr><th>Month</th><th>Payment</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead>
+            <tbody id="atbody"></tbody>
+          </table>
+          <button class="smb" id="amort-btn" onclick="toggleAmort()">SHOW FULL SCHEDULE ↓</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rent vs Buy Panel -->
+    <div class="cpanel" id="calc-rvb">
+      <div class="clayout">
+        <div class="cform">
+          <h3>RENT VS BUY INPUTS</h3>
+          <div style="border-bottom:1px solid var(--gray-b);padding-bottom:20px;margin-bottom:20px">
+            <div style="font-family:var(--fd);font-size:16px;letter-spacing:1px;color:var(--orange);margin-bottom:16px">BUYING</div>
+            <div class="fg"><label class="fl">Home Purchase Price</label><input type="number" class="fi" id="rv-price" value="450000" oninput="calcRvB()"></div>
+            <div class="frow">
+              <div class="fg"><label class="fl">Down Payment (%)</label><input type="number" class="fi" id="rv-down" value="10" oninput="calcRvB()"></div>
+              <div class="fg"><label class="fl">Interest Rate (%)</label><input type="number" class="fi" id="rv-rate" value="6.75" step="0.125" oninput="calcRvB()"></div>
+            </div>
+            <div class="frow">
+              <div class="fg"><label class="fl">Annual Appreciation (%)</label><input type="number" class="fi" id="rv-appr" value="4" step="0.5" oninput="calcRvB()"></div>
+              <div class="fg"><label class="fl">Annual Prop Tax (%)</label><input type="number" class="fi" id="rv-tax" value="0.7" step="0.1" oninput="calcRvB()"></div>
+            </div>
+            <div class="fg"><label class="fl">Annual Maintenance (%)</label><input type="number" class="fi" id="rv-maint" value="1" step="0.1" oninput="calcRvB()"></div>
+          </div>
+          <div style="border-bottom:1px solid var(--gray-b);padding-bottom:20px;margin-bottom:20px">
+            <div style="font-family:var(--fd);font-size:16px;letter-spacing:1px;color:var(--orange);margin-bottom:16px">RENTING</div>
+            <div class="fg"><label class="fl">Monthly Rent</label><input type="number" class="fi" id="rv-rent" value="2400" oninput="calcRvB()"></div>
+            <div class="fg"><label class="fl">Annual Rent Increase (%)</label><input type="number" class="fi" id="rv-ri" value="3" step="0.5" oninput="calcRvB()"></div>
+          </div>
+          <div class="fg"><label class="fl">Time Horizon (Years)</label><input type="number" class="fi" id="rv-yrs" value="7" min="1" max="30" oninput="calcRvB()"></div>
+        </div>
+        <div class="cres">
+          <div class="resc">
+            <h3>COMPARISON RESULTS</h3>
+            <div class="rvbc">
+              <div class="rvbcard" id="rv-buy-card"><div class="rl">🏠 BUYING</div><div class="ra" id="rv-buy-amt">—</div><div class="rs">Net cost after equity</div></div>
+              <div class="rvbcard" id="rv-rent-card"><div class="rl">🏢 RENTING</div><div class="ra" id="rv-rent-amt">—</div><div class="rs">Total rent paid</div></div>
+            </div>
+            <div class="rvbv" id="rv-verdict">Run the numbers above to see your results.</div>
+            <div class="bklist" style="margin-top:20px">
+              <div class="bki"><span class="il">Home value after <span id="rv-yrs-d">7</span> yrs</span><span class="iv" id="rv-fv">—</span></div>
+              <div class="bki"><span class="il">Equity built</span><span class="iv" id="rv-eq">—</span></div>
+              <div class="bki"><span class="il">Total mortgage payments</span><span class="iv" id="rv-mp">—</span></div>
+              <div class="bki"><span class="il">Total taxes + maintenance</span><span class="iv" id="rv-oc">—</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======== BLOG ======== -->
+<section id="page-blog" class="page">
+  <div class="sec">
+    <div class="rv">
+      <div class="slabel">INSIGHTS &amp; EDUCATION</div>
+      <h2 class="stitle">THE MORTGAGE<br><span style="color:var(--orange)">BLOG</span></h2>
+      <div class="div"></div>
+      <p class="ssub">Market updates, home buying tips, and mortgage education from Drake Khamis.</p>
+    </div>
+    <div class="bgrid">
+      <div class="bcard rv">
+        <div class="bimg" style="background:linear-gradient(135deg,#1a1a2e,#16213e)"><span style="z-index:1;position:relative">🏡</span><span class="bcat">MARKET UPDATE</span></div>
+        <div class="bbody"><div class="bdate">MARCH 28, 2026</div><h3 class="btitle">ARIZONA HOUSING MARKET: WHAT TO EXPECT IN 2026</h3><p class="bexc">Phoenix home values have remained resilient despite rate pressures. Here's where the Tempe and East Valley markets are heading and what it means for buyers and sellers.</p><a class="brm" href="#" onclick="return false">Read More →</a></div>
+      </div>
+      <div class="bcard rv">
+        <div class="bimg" style="background:linear-gradient(135deg,#1a2a1a,#162e16)"><span style="z-index:1;position:relative">📉</span><span class="bcat">RATES</span></div>
+        <div class="bbody"><div class="bdate">MARCH 15, 2026</div><h3 class="btitle">WHEN WILL MORTGAGE RATES DROP? WHAT THE DATA SAYS</h3><p class="bexc">The Fed's rate decisions, 10-year Treasury yields, and inflation data all drive mortgage rates. Here's how to read the signals and decide whether to lock now or float.</p><a class="brm" href="#" onclick="return false">Read More →</a></div>
+      </div>
+      <div class="bcard rv">
+        <div class="bimg" style="background:linear-gradient(135deg,#2a1a1a,#2e1616)"><span style="z-index:1;position:relative">🎖️</span><span class="bcat">VA LOANS</span></div>
+        <div class="bbody"><div class="bdate">MARCH 5, 2026</div><h3 class="btitle">5 VA LOAN MYTHS THAT ARE COSTING VETERANS MONEY</h3><p class="bexc">Many veterans don't use their VA benefit because of outdated myths. We bust the most common misconceptions and show you why a VA loan is often the smartest financial choice.</p><a class="brm" href="#" onclick="return false">Read More →</a></div>
+      </div>
+      <div class="bcard rv">
+        <div class="bimg" style="background:linear-gradient(135deg,#1a1a2e,#0d1b2a)"><span style="z-index:1;position:relative">📊</span><span class="bcat">FIRST-TIME BUYERS</span></div>
+        <div class="bbody"><div class="bdate">FEBRUARY 20, 2026</div><h3 class="btitle">THE COMPLETE GUIDE TO BUYING YOUR FIRST HOME IN ARIZONA</h3><p class="bexc">From credit score prep to closing day — a step-by-step roadmap for first-time buyers navigating the Arizona market in 2026. Down payment assistance programs included.</p><a class="brm" href="#" onclick="return false">Read More →</a></div>
+      </div>
+      <div class="bcard rv">
+        <div class="bimg" style="background:linear-gradient(135deg,#2a1f1a,#2e2016)"><span style="z-index:1;position:relative">🔄</span><span class="bcat">REFINANCE</span></div>
+        <div class="bbody"><div class="bdate">FEBRUARY 8, 2026</div><h3 class="btitle">REFINANCE BREAK-EVEN ANALYSIS: IS IT WORTH IT?</h3><p class="bexc">Not every refinance makes financial sense. Learn how to calculate your break-even point and whether the savings justify the closing costs — with real Arizona examples.</p><a class="brm" href="#" onclick="return false">Read More →</a></div>
+      </div>
+      <div class="bcard rv">
+        <div class="bimg" style="background:linear-gradient(135deg,#1a2a2a,#162e2e)"><span style="z-index:1;position:relative">💰</span><span class="bcat">INVESTING</span></div>
+        <div class="bbody"><div class="bdate">JANUARY 25, 2026</div><h3 class="btitle">DSCR LOANS: THE INVESTOR'S SECRET WEAPON IN PHOENIX</h3><p class="bexc">Debt Service Coverage Ratio loans let real estate investors qualify based on rental income — not personal income. Here's how to use them to scale your Phoenix portfolio.</p><a class="brm" href="#" onclick="return false">Read More →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== VIDEOS ======== -->
+<section id="page-videos" class="page">
+  <div class="sec">
+    <div class="rv">
+      <div class="slabel">EDUCATION CENTER</div>
+      <h2 class="stitle">WATCH &amp;<br><span style="color:var(--orange)">LEARN</span></h2>
+      <div class="div"></div>
+      <p class="ssub">Mortgage education made simple. Real answers, real scenarios, from your local broker.</p>
+    </div>
+    <div class="vgrid2">
+      <div class="vidc rv"><div class="vthumb"><div class="vplaybtn">▶</div><span class="vdur">8:24</span></div><div class="vinfo"><div class="vtag">GETTING STARTED</div><div class="vtitle2">HOW THE MORTGAGE PROCESS WORKS</div><p class="vdesc2">A complete walkthrough from pre-approval to closing keys in your hand.</p></div></div>
+      <div class="vidc rv"><div class="vthumb"><div class="vplaybtn">▶</div><span class="vdur">6:12</span></div><div class="vinfo"><div class="vtag">CREDIT</div><div class="vtitle2">BOOST YOUR CREDIT SCORE IN 90 DAYS</div><p class="vdesc2">Practical steps to improve your score before applying — the ones that actually move the needle.</p></div></div>
+      <div class="vidc rv"><div class="vthumb"><div class="vplaybtn">▶</div><span class="vdur">5:48</span></div><div class="vinfo"><div class="vtag">FHA VS CONVENTIONAL</div><div class="vtitle2">FHA OR CONVENTIONAL: WHICH IS RIGHT FOR YOU?</div><p class="vdesc2">Side-by-side comparison with real numbers to help you choose the best loan.</p></div></div>
+      <div class="vidc rv"><div class="vthumb"><div class="vplaybtn">▶</div><span class="vdur">7:03</span></div><div class="vinfo"><div class="vtag">DOWN PAYMENT</div><div class="vtitle2">DOWN PAYMENT ASSISTANCE PROGRAMS IN ARIZONA</div><p class="vdesc2">Arizona has several DPA programs that can cover your down payment. Here's how to access them.</p></div></div>
+      <div class="vidc rv"><div class="vthumb"><div class="vplaybtn">▶</div><span class="vdur">9:15</span></div><div class="vinfo"><div class="vtag">RATES</div><div class="vtitle2">UNDERSTANDING INTEREST RATES: LOCK OR FLOAT?</div><p class="vdesc2">How mortgage rates work, what drives them daily, and when to lock your rate.</p></div></div>
+      <div class="vidc rv"><div class="vthumb"><div class="vplaybtn">▶</div><span class="vdur">4:56</span></div><div class="vinfo"><div class="vtag">VA LOANS</div><div class="vtitle2">USING YOUR VA BENEFIT: A VETERAN'S GUIDE</div><p class="vdesc2">Everything veterans need to know about VA loans — eligibility, COE, and what to expect.</p></div></div>
+      <div class="vidc rv"><div class="vthumb"><div class="vplaybtn">▶</div><span class="vdur">6:33</span></div><div class="vinfo"><div class="vtag">REFINANCING</div><div class="vtitle2">WHEN DOES REFINANCING MAKE SENSE?</div><p class="vdesc2">Walk through the break-even calculation and key factors before starting the refi process.</p></div></div>
+      <div class="vidc rv"><div class="vthumb"><div class="vplaybtn">▶</div><span class="vdur">11:20</span></div><div class="vinfo"><div class="vtag">INVESTING</div><div class="vtitle2">REAL ESTATE INVESTING WITH DSCR LOANS</div><p class="vdesc2">How investors are using DSCR loans to build portfolios in Phoenix without showing personal income.</p></div></div>
+      <div class="vidc rv"><div class="vthumb"><div class="vplaybtn">▶</div><span class="vdur">5:17</span></div><div class="vinfo"><div class="vtag">MARKET UPDATE</div><div class="vtitle2">PHOENIX MARKET UPDATE — Q1 2026</div><p class="vdesc2">Current conditions in Tempe and the greater Phoenix housing market — where rates are heading.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CONTACT ======== -->
+<section id="page-contact" class="page">
+  <div class="sec">
+    <div class="rv">
+      <div class="slabel">GET IN TOUCH</div>
+      <h2 class="stitle">LET'S FIND<br><span style="color:var(--orange)">YOUR LOAN</span></h2>
+      <div class="div"></div>
+      <p class="ssub">Ready to start or just have questions? Reach out directly — Drake responds personally.</p>
+    </div>
+    <div class="clayout2">
+      <div class="cfw rv">
+        <h3>SEND A MESSAGE</h3>
+        <form id="cform" onsubmit="submitContact(event)">
+          <div class="frow" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:0">
+            <div class="cfg"><label>First Name</label><input type="text" required placeholder="John"></div>
+            <div class="cfg"><label>Last Name</label><input type="text" required placeholder="Smith"></div>
+          </div>
+          <div class="cfg"><label>Email Address</label><input type="email" required placeholder="john@example.com"></div>
+          <div class="cfg"><label>Phone Number</label><input type="tel" placeholder="(480) 555-0100"></div>
+          <div class="cfg"><label>I'm Looking To</label>
+            <select>
+              <option value="">— Select One —</option>
+              <option>Purchase a Home</option>
+              <option>Refinance</option>
+              <option>Get Pre-Approved</option>
+              <option>Access Home Equity (HELOC)</option>
+              <option>Finance an Investment Property</option>
+              <option>Other / General Question</option>
+            </select>
+          </div>
+          <div class="cfg"><label>Estimated Purchase Price / Loan Amount</label><input type="text" placeholder="$450,000"></div>
+          <div class="cfg"><label>Message</label><textarea placeholder="Tell Drake a bit about your situation..."></textarea></div>
+          <button type="submit" class="btn btn-p" style="width:100%;justify-content:center">SEND MESSAGE</button>
+          <div class="fsucc" id="fsucc">✓ Message received! Drake will be in touch within 24 hours.</div>
+        </form>
+      </div>
+      <div class="rv">
+        <div class="cblock">
+          <div class="citem"><div class="cico">📞</div><div><div class="cilbl">Phone</div><div class="cival">(480) 555-0100</div><div class="cisub">Available Mon–Sat, 8am–7pm MST</div></div></div>
+          <div class="citem"><div class="cico">✉️</div><div><div class="cilbl">Email</div><div class="cival">drake@epiqlending.com</div><div class="cisub">Response within 24 hours guaranteed</div></div></div>
+          <div class="citem"><div class="cico">📍</div><div><div class="cilbl">Office</div><div class="cival">Tempe, Arizona</div><div class="cisub">Serving Tempe, Phoenix, Scottsdale, Mesa &amp; the Greater Valley</div></div></div>
+          <div class="citem"><div class="cico">🏦</div><div><div class="cilbl">NMLS</div><div class="cival">Drake Khamis · #XXXXXXX</div><div class="cisub">EPiQ Lending · AZ Licensed Mortgage Broker</div></div></div>
+        </div>
+        <div class="mapp">
+          <span class="mappin">📍</span>
+          <span class="maplbl">Tempe, Arizona · Greater Phoenix Area</span>
+        </div>
+        <div style="background:var(--charcoal-2);border:1px solid var(--gray-b);border-radius:var(--rl);padding:24px;margin-top:24px">
+          <div style="font-family:var(--fd);font-size:18px;letter-spacing:1px;margin-bottom:12px">RESPONSE TIME COMMITMENT</div>
+          <p style="font-size:15px;color:var(--gray-l);line-height:1.6">Drake personally responds to every inquiry. Expect a reply within <strong style="color:var(--orange)">4 business hours</strong> during the week, and within 24 hours on weekends. For urgent matters, call directly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FOOTER ======== -->
+<footer>
+  <div class="ftop">
+    <div>
+      <div class="flogo">THE KHAMIS TEAM</div>
+      <div class="flogos">EPiQ Lending · NMLS #XXXXXXX</div>
+      <p class="ftag">Expert mortgage guidance for Arizona homebuyers, homeowners, and investors. Serving Tempe, Phoenix, and the greater Valley.</p>
+      <div class="fsoc">
+        <a class="slink" href="#" onclick="return false">in</a>
+        <a class="slink" href="#" onclick="return false">f</a>
+        <a class="slink" href="#" onclick="return false">📸</a>
+        <a class="slink" href="#" onclick="return false">▶</a>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>PAGES</h4>
+      <ul>
+        <li><a href="#" onclick="nav('home');return false">Home</a></li>
+        <li><a href="#" onclick="nav('about');return false">About Drake</a></li>
+        <li><a href="#" onclick="nav('products');return false">Loan Products</a></li>
+        <li><a href="#" onclick="nav('calculator');return false">Calculators</a></li>
+        <li><a href="#" onclick="nav('blog');return false">Blog</a></li>
+        <li><a href="#" onclick="nav('videos');return false">Videos</a></li>
+        <li><a href="#" onclick="nav('contact');return false">Contact</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>LOAN PRODUCTS</h4>
+      <ul>
+        <li><a href="#" onclick="nav('products');return false">Conventional</a></li>
+        <li><a href="#" onclick="nav('products');return false">FHA Loans</a></li>
+        <li><a href="#" onclick="nav('products');return false">VA Loans</a></li>
+        <li><a href="#" onclick="nav('products');return false">Jumbo Loans</a></li>
+        <li><a href="#" onclick="nav('products');return false">USDA Loans</a></li>
+        <li><a href="#" onclick="nav('products');return false">Refinance</a></li>
+        <li><a href="#" onclick="nav('products');return false">HELOC</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>CONTACT</h4>
+      <ul>
+        <li><a href="tel:4805550100">(480) 555-0100</a></li>
+        <li><a href="mailto:drake@epiqlending.com">drake@epiqlending.com</a></li>
+        <li><a href="#" onclick="return false">Tempe, Arizona</a></li>
+        <li><a href="#" onclick="nav('contact');return false">Send a Message</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fdisc">© 2026 The Khamis Team at EPiQ Lending. All rights reserved. Drake Khamis NMLS #XXXXXXX. EPiQ Lending NMLS #XXXXXXX. Licensed in the State of Arizona. Equal Housing Lender. This is not a commitment to lend. All loans subject to credit approval, income verification, and property appraisal. Rates are subject to change without notice. Not all programs available in all states.</div>
+  <div class="fbot">
+    <div>© 2026 The Khamis Team · EPiQ Lending</div>
+    <div><a href="#" onclick="return false">Privacy Policy</a> · <a href="#" onclick="return false">Terms of Use</a> · <a href="#" onclick="return false">NMLS Consumer Access</a></div>
+  </div>
+</footer>
+
+<script>
+/* ============ CURSOR ============ */
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,[onclick]').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cd.style.transform='translate(-50%,-50%) scale(2)';cr.style.transform='translate(-50%,-50%) scale(1.5)';cr.style.opacity='1'});
+  el.addEventListener('mouseleave',()=>{cd.style.transform='translate(-50%,-50%) scale(1)';cr.style.transform='translate(-50%,-50%) scale(1)';cr.style.opacity='.6'});
+});
+
+/* ============ TICKER ============ */
+const tdata=[
+  {n:'S&P 500',v:5783.40,c:+12.40,p:+0.21},
+  {n:'VIX',v:18.24,c:-0.32,p:-1.72},
+  {n:'10-YR TREASURY',v:4.21,c:+0.03,p:null,s:'%'},
+  {n:'30-YR MORTGAGE',v:6.75,c:-0.01,p:null,s:'%'},
+  {n:'DOW JONES',v:43208.10,c:+89.30,p:+0.21},
+  {n:'NASDAQ',v:18142.30,c:+45.10,p:+0.25},
+];
+function buildTicker(){
+  const items=[...tdata,...tdata];
+  document.getElementById('tt').innerHTML=items.map(d=>{
+    const up=d.c>=0,s=d.s||'';
+    const val=d.v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+s;
+    const chg=(up?'+':'')+d.c.toFixed(2)+s;
+    const pct=d.p!=null?` (${up?'+':''}${d.p.toFixed(2)}%)`:'';
+    return`<div class="ti"><span class="tn">${d.n}</span><span class="tv">${val}</span><span class="${up?'up':'dn'}">${up?'▲':'▼'} ${chg}${pct}</span></div>`;
+  }).join('');
+}
+buildTicker();
+setInterval(()=>{tdata.forEach(d=>{const m=(Math.random()-.5)*(d.s?0.02:d.v*.003);d.c+=m;d.v+=m;if(d.p!=null)d.p=(d.c/(d.v-d.c))*100});buildTicker()},5000);
+
+/* ============ NAVIGATION ============ */
+let cur='home';
+function nav(page){
+  if(page===cur)return;
+  const prev=document.getElementById('page-'+cur);
+  const next=document.getElementById('page-'+page);
+  if(!next)return;
+  prev.classList.remove('visible');
+  setTimeout(()=>{
+    prev.classList.remove('active');
+    next.classList.add('active');
+    window.scrollTo({top:0,behavior:'instant'});
+    setTimeout(()=>{next.classList.add('visible');setTimeout(reveal,50)},30);
+    if(page==='calculator'){setTimeout(()=>{calcPITI();calcRvB()},100)}
+  },280);
+  cur=page;
+  document.querySelectorAll('[data-p]').forEach(a=>a.classList.toggle('active',a.dataset.p===page));
+}
+
+/* ============ SCROLL ============ */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',scrollY>20);
+  document.getElementById('btt').classList.toggle('vis',scrollY>400);
+  reveal();
+});
+document.getElementById('btt').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+
+/* ============ MOBILE MENU ============ */
+function toggleMenu(){
+  const m=document.getElementById('mm'),h=document.getElementById('ham');
+  m.classList.toggle('open');
+  document.body.classList.toggle('no-scroll');
+  const s=h.querySelectorAll('span');
+  if(m.classList.contains('open')){
+    s[0].style.transform='rotate(45deg) translate(5px,5px)';
+    s[1].style.opacity='0';
+    s[2].style.transform='rotate(-45deg) translate(5px,-5px)';
+  }else{s[0].style.transform='';s[1].style.opacity='';s[2].style.transform=''}
+}
+
+/* ============ PRODUCT CARDS ============ */
+function toggleProd(card){
+  const was=card.classList.contains('exp');
+  document.querySelectorAll('.pcard.exp').forEach(c=>c.classList.remove('exp'));
+  if(!was)card.classList.add('exp');
+}
+
+/* ============ REVEAL ============ */
+function reveal(){
+  document.querySelectorAll('.rv:not(.rved)').forEach(el=>{
+    if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('rved');
+  });
+}
+
+/* ============ CALC TABS ============ */
+function switchTab(tab,btn){
+  document.querySelectorAll('.ctab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.cpanel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('calc-'+tab).classList.add('active');
+  if(tab==='piti')calcPITI();else calcRvB();
+}
+
+/* ============ PITI CALCULATOR ============ */
+const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
+function syncDP(){
+  const p=+document.getElementById('hp').value||0;
+  const d=+document.getElementById('dp').value||0;
+  document.getElementById('dpp').value=p>0?(d/p*100).toFixed(1):0;
+  calcPITI();
+}
+function syncDPP(){
+  const p=+document.getElementById('hp').value||0;
+  document.getElementById('dp').value=Math.round(p*(+document.getElementById('dpp').value||0)/100);
+  calcPITI();
+}
+
+let amortRows=[],showAll=false;
+
+function calcPITI(){
+  const price=+document.getElementById('hp').value||0;
+  let dp=+document.getElementById('dp').value||0;
+  if(dp>price)dp=price;
+  const pct=price>0?dp/price*100:0;
+  document.getElementById('dpp').value=pct.toFixed(1);
+  const loan=price-dp;
+  const ar=+document.getElementById('ir').value||0;
+  const yrs=+document.getElementById('lt').value||30;
+  const months=yrs*12;
+  const r=ar/100/12;
+  let pi=0;
+  if(r>0&&loan>0)pi=loan*(r*Math.pow(1+r,months))/(Math.pow(1+r,months)-1);
+  else if(loan>0)pi=loan/months;
+  const tax=(price*(+document.getElementById('pt').value||0)/100)/12;
+  const ins=(+document.getElementById('ins').value||0)/12;
+  const hoa=+document.getElementById('hoa').value||0;
+  const pmiAmt=pct<20?loan*(+document.getElementById('pmi').value||0)/100/12:0;
+  const tot=pi+tax+ins+pmiAmt+hoa;
+  document.getElementById('total-pmt').textContent=fmt(tot);
+  document.getElementById('r-pi').textContent=fmt(pi);
+  document.getElementById('r-tax').textContent=fmt(tax);
+  document.getElementById('r-ins').textContent=fmt(ins);
+  document.getElementById('r-pmi').textContent=pct<20?fmt(pmiAmt):'N/A';
+  document.getElementById('r-hoa').textContent=fmt(hoa);
+  document.getElementById('r-tot').textContent=fmt(tot);
+  document.getElementById('r-loan').textContent=fmt(loan);
+  const tpaid=pi*months;
+  const tint=tpaid-loan;
+  document.getElementById('r-tint').textContent=fmt(tint);
+  document.getElementById('r-tcost').textContent=fmt(tpaid);
+  document.getElementById('a-loan').textContent=fmt(loan);
+  document.getElementById('a-int').textContent=fmt(tint);
+  document.getElementById('a-tot').textContent=fmt(tpaid);
+  drawDonut(pi,tax,ins,pmiAmt,hoa);
+  buildAmort(loan,r,pi,months);
+}
+
+function drawDonut(pi,tax,ins,pmi,hoa){
+  const c=document.getElementById('donut');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  const total=pi+tax+ins+pmi+hoa;
+  if(total<=0)return;
+  const slices=[{v:pi,c:'#f05a00'},{v:tax,c:'#ff9940'},{v:ins,c:'#ffcc80'},{v:pmi,c:'#888'},{v:hoa,c:'#555'}].filter(s=>s.v>0);
+  ctx.clearRect(0,0,160,160);
+  let a=-Math.PI/2;
+  slices.forEach(s=>{const sw=s.v/total*Math.PI*2;ctx.beginPath();ctx.moveTo(80,80);ctx.arc(80,80,60,a,a+sw);ctx.closePath();ctx.fillStyle=s.c;ctx.fill();a+=sw});
+  ctx.beginPath();ctx.arc(80,80,36,0,Math.PI*2);ctx.fillStyle='#2a2a2a';ctx.fill();
+}
+
+function buildAmort(loan,r,pmt,months){
+  amortRows=[];
+  let bal=loan;
+  for(let i=1;i<=months;i++){
+    const int=bal*r,prin=pmt-int;
+    bal=Math.max(0,bal-prin);
+    amortRows.push({m:i,pmt,prin,int,bal});
+  }
+  renderAmort();
+}
+
+function renderAmort(){
+  const lim=showAll?amortRows.length:12;
+  document.getElementById('atbody').innerHTML=amortRows.slice(0,lim).map(r=>
+    `<tr><td>Month ${r.m}</td><td>${fmt(r.pmt)}</td><td>${fmt(r.prin)}</td><td>${fmt(r.int)}</td><td>${fmt(r.bal)}</td></tr>`
+  ).join('');
+  document.getElementById('amort-btn').textContent=showAll?'SHOW LESS ↑':`SHOW FULL SCHEDULE (${amortRows.length} months) ↓`;
+}
+
+function toggleAmort(){showAll=!showAll;renderAmort()}
+
+/* ============ RENT VS BUY ============ */
+function calcRvB(){
+  const price=+document.getElementById('rv-price').value||0;
+  const down=+document.getElementById('rv-down').value||0;
+  const rate=+document.getElementById('rv-rate').value||0;
+  const appr=+document.getElementById('rv-appr').value||0;
+  const tax=+document.getElementById('rv-tax').value||0;
+  const maint=+document.getElementById('rv-maint').value||0;
+  const rent=+document.getElementById('rv-rent').value||0;
+  const ri=+document.getElementById('rv-ri').value||0;
+  const yrs=+document.getElementById('rv-yrs').value||7;
+  document.getElementById('rv-yrs-d').textContent=yrs;
+  const dp=price*down/100,loan=price-dp,r=rate/100/12,months=30*12;
+  let pi=0;
+  if(r>0&&loan>0)pi=loan*(r*Math.pow(1+r,months))/(Math.pow(1+r,months)-1);
+  else if(loan>0)pi=loan/months;
+  const totMort=pi*12*yrs;
+  const totOther=(price*tax/100+price*maint/100)*yrs;
+  const fv=price*Math.pow(1+appr/100,yrs);
+  let bal=loan;
+  for(let i=0;i<yrs*12;i++){const int=bal*r;bal=Math.max(0,bal-(pi-int))}
+  const equity=fv-bal;
+  const buyNet=totMort+totOther+dp-equity;
+  let totRent=0,mr=rent;
+  for(let y=0;y<yrs;y++){totRent+=mr*12;mr*=(1+ri/100)}
+  document.getElementById('rv-fv').textContent=fmt(fv);
+  document.getElementById('rv-eq').textContent=fmt(equity);
+  document.getElementById('rv-mp').textContent=fmt(totMort);
+  document.getElementById('rv-oc').textContent=fmt(totOther);
+  document.getElementById('rv-buy-amt').textContent=fmt(Math.max(0,buyNet));
+  document.getElementById('rv-rent-amt').textContent=fmt(totRent);
+  const bc=document.getElementById('rv-buy-card'),rc=document.getElementById('rv-rent-card'),vd=document.getElementById('rv-verdict');
+  bc.classList.remove('winner');rc.classList.remove('winner');
+  if(buyNet<totRent){bc.classList.add('winner');vd.textContent=`🏠 Buying comes out ahead by ${fmt(totRent-buyNet)} over ${yrs} years at these assumptions.`}
+  else if(buyNet>totRent){rc.classList.add('winner');vd.textContent=`🏢 Renting is lower cost by ${fmt(buyNet-totRent)} over ${yrs} years — but buying builds ${fmt(equity)} in equity.`}
+  else{vd.textContent=`Results are roughly equal over ${yrs} years. Consider your priorities.`}
+}
+
+/* ============ CONTACT FORM ============ */
+function submitContact(e){
+  e.preventDefault();
+  const s=document.getElementById('fsucc');
+  s.style.display='block';
+  e.target.reset();
+  setTimeout(()=>s.style.display='none',6000);
+}
+
+/* ============ INIT ============ */
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('page-home').classList.add('active');
+  setTimeout(()=>{document.getElementById('page-home').classList.add('visible');reveal()},80);
+  calcPITI();
+  calcRvB();
+});
+</script>
+</body>
+</html>

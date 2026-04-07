@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loan Products | The Khamis Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --charcoal: #1a1a1a;
+    --charcoal-mid: #252525;
+    --charcoal-light: #2f2f2f;
+    --orange: #f05a00;
+    --orange-bright: #ff6a10;
+    --cream: #f5f0eb;
+    --cream-dark: #e8e0d5;
+    --white: #ffffff;
+    --gray-text: #888888;
+    --gray-border: #333333;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--charcoal);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CURSOR */
+  .cursor { width: 12px; height: 12px; background: var(--orange); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.15s ease; }
+  .cursor-ring { width: 36px; height: 36px; border: 1px solid rgba(240,90,0,0.4); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    background: rgba(26,26,26,0.96);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(240,90,0,0.15);
+    transition: padding 0.3s ease;
+  }
+  .nav-logo { display: flex; flex-direction: column; line-height: 1; cursor: none; }
+  .nav-logo-main { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--white); }
+  .nav-logo-sub { font-size: 10px; letter-spacing: 4px; color: var(--orange); text-transform: uppercase; margin-top: 2px; }
+  .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+  .nav-links a { color: var(--gray-text); text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s ease; font-weight: 400; cursor: none; }
+  .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+  .nav-cta { background: var(--orange) !important; color: var(--white) !important; padding: 10px 22px !important; }
+  .nav-cta:hover { background: var(--orange-bright) !important; }
+
+  /* SHARED */
+  .section-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; font-weight: 400; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(42px, 5vw, 72px); line-height: 0.95; color: var(--white); letter-spacing: 1px; }
+  .orange-line { width: 48px; height: 2px; background: var(--orange); margin-bottom: 24px; }
+  .btn-primary { background: var(--orange); color: var(--white); padding: 16px 36px; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: all 0.3s ease; display: inline-block; cursor: none; border: none; font-family: 'DM Sans', sans-serif; }
+  .btn-primary:hover { background: var(--orange-bright); }
+
+  /* =================== PRODUCTS GRID VIEW =================== */
+  #products-grid-view {
+    padding: 100px 60px 80px;
+    min-height: 100vh;
+  }
+
+  .products-page-header { margin-bottom: 64px; }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .product-card {
+    background: var(--charcoal-mid);
+    padding: 44px 36px;
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-bottom: 2px solid transparent;
+  }
+
+  .product-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--orange);
+    transition: width 0.4s ease;
+  }
+
+  .product-card:hover::before { width: 100%; }
+  .product-card:hover { background: var(--charcoal-light); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+
+  .product-card-inner { position: relative; z-index: 2; }
+
+  .product-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    color: rgba(240,90,0,0.1);
+    line-height: 1;
+    margin-bottom: 20px;
+    transition: color 0.4s ease;
+    letter-spacing: -1px;
+  }
+  .product-card:hover .product-number { color: rgba(240,90,0,0.22); }
+
+  .product-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--orange);
+    padding: 4px 12px;
+    margin-bottom: 12px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .product-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 14px;
+    line-height: 1;
+  }
+
+  .product-tagline {
+    font-family: 'Crimson Pro', serif;
+    font-size: 16px;
+    color: var(--cream-dark);
+    font-style: italic;
+    margin-bottom: 16px;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .product-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--gray-text);
+    margin-bottom: 28px;
+  }
+
+  .product-quick-facts {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .quick-fact {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .quick-fact-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray-text);
+  }
+
+  .quick-fact-value {
+    font-size: 13px;
+    color: var(--orange);
+    font-weight: 500;
+  }
+
+  .product-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-border);
+  }
+
+  .expand-btn {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    background: none;
+    border: none;
+    cursor: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.3s ease;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+  }
+
+  .product-card:hover .expand-btn { gap: 14px; }
+
+  .expand-icon {
+    width: 28px; height: 28px;
+    border: 1px solid var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: var(--orange);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .product-card:hover .expand-icon {
+    background: var(--orange);
+    color: var(--white);
+  }
+
+  /* =================== PRODUCT DETAIL VIEW =================== */
+  #product-detail-view {
+    display: none;
+    min-height: 100vh;
+    padding-top: 80px;
+    animation: detailIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  #product-detail-view.active { display: block; }
+
+  @keyframes detailIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* DETAIL HERO */
+  .detail-hero {
+    background: var(--charcoal-mid);
+    padding: 60px 60px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .detail-hero::before {
+    content: attr(data-number);
+    position: absolute;
+    right: -20px;
+    top: -30px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 280px;
+    color: rgba(240,90,0,0.04);
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -8px;
+  }
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray-text);
+    background: none;
+    border: none;
+    cursor: none;
+    font-family: 'DM Sans', sans-serif;
+    transition: color 0.3s ease;
+    margin-bottom: 48px;
+    padding: 0;
+  }
+
+  .back-btn:hover { color: var(--orange); }
+
+  .back-arrow {
+    width: 32px; height: 32px;
+    border: 1px solid var(--gray-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+
+  .back-btn:hover .back-arrow {
+    border-color: var(--orange);
+    color: var(--orange);
+    transform: translateX(-3px);
+  }
+
+  .detail-hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+    padding-bottom: 60px;
+  }
+
+  .detail-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--orange);
+    padding: 6px 16px;
+    margin-bottom: 20px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .detail-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 6vw, 96px);
+    line-height: 0.92;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+
+  .detail-tagline {
+    font-family: 'Crimson Pro', serif;
+    font-size: 22px;
+    line-height: 1.6;
+    color: var(--cream-dark);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .detail-hero-facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    align-self: end;
+  }
+
+  .detail-fact {
+    background: var(--charcoal);
+    padding: 24px 28px;
+    border-top: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+
+  .detail-fact:hover { border-top-color: var(--orange); }
+
+  .detail-fact-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray-text);
+    margin-bottom: 8px;
+  }
+
+  .detail-fact-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: var(--orange);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+
+  .detail-fact-sub {
+    font-size: 11px;
+    color: var(--gray-text);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* DETAIL BODY */
+  .detail-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .detail-description {
+    padding: 60px;
+    background: var(--charcoal);
+  }
+
+  .detail-description h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 28px;
+  }
+
+  .detail-body-text {
+    font-family: 'Crimson Pro', serif;
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--cream-dark);
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .detail-body-text strong {
+    color: var(--orange);
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  .detail-benefits {
+    margin-top: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .detail-benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--charcoal-mid);
+    transition: transform 0.3s ease;
+  }
+
+  .detail-benefit:hover { transform: translateX(6px); }
+
+  .benefit-dot {
+    width: 6px; height: 6px;
+    background: var(--orange);
+    border-radius: 50%;
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .benefit-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--cream-dark);
+  }
+
+  .benefit-text strong { color: var(--orange); font-weight: 500; }
+
+  /* VIDEO PANEL */
+  .detail-video-panel {
+    padding: 60px;
+    background: var(--charcoal-mid);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .detail-video-panel h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--white);
+  }
+
+  .video-embed-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--charcoal);
+    overflow: hidden;
+  }
+
+  .video-embed-container iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  .video-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background: var(--charcoal);
+    border: 1px dashed var(--gray-border);
+  }
+
+  .video-placeholder-icon {
+    width: 64px; height: 64px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+  }
+
+  .video-placeholder-icon svg {
+    width: 24px; height: 24px;
+    fill: white;
+    margin-left: 4px;
+  }
+
+  .video-placeholder-text {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray-text);
+  }
+
+  .video-placeholder-sub {
+    font-size: 12px;
+    color: var(--gray-text);
+    opacity: 0.6;
+    text-align: center;
+    max-width: 220px;
+    line-height: 1.6;
+  }
+
+  /* WHO ITS FOR */
+  .detail-who {
+    padding: 60px;
+    background: var(--charcoal-mid);
+  }
+
+  .detail-who h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+
+  .who-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .who-card {
+    background: var(--charcoal);
+    padding: 28px 24px;
+    border-left: 2px solid var(--orange);
+    transition: transform 0.3s ease;
+  }
+
+  .who-card:hover { transform: translateX(6px); }
+
+  .who-card-title {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .who-card-body {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--gray-text);
+  }
+
+  /* DETAIL CTA */
+  .detail-cta {
+    background: var(--orange);
+    padding: 80px 60px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 60px;
+  }
+
+  .detail-cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 4vw, 64px);
+    color: var(--white);
+    line-height: 0.95;
+    letter-spacing: 2px;
+  }
+
+  .detail-cta-title span { color: rgba(255,255,255,0.35); }
+
+  .btn-white {
+    background: var(--white);
+    color: var(--orange);
+    padding: 18px 44px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+    white-space: nowrap;
+    border: none;
+    cursor: none;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.3s ease;
+  }
+
+  .btn-white:hover { background: var(--charcoal); color: var(--white); }
+
+  /* RELATED PRODUCTS */
+  .related-products {
+    padding: 80px 60px;
+    background: var(--charcoal);
+  }
+
+  .related-products h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 36px;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .related-card {
+    background: var(--charcoal-mid);
+    padding: 32px 28px;
+    cursor: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .related-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--orange);
+    transition: width 0.3s ease;
+  }
+
+  .related-card:hover::before { width: 100%; }
+  .related-card:hover { background: var(--charcoal-light); transform: translateY(-4px); }
+
+  .related-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .related-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--gray-text);
+    margin-bottom: 20px;
+  }
+
+  .related-link {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    background: none;
+    border: none;
+    cursor: none;
+    font-family: 'DM Sans', sans-serif;
+    transition: gap 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .related-card:hover .related-link { gap: 14px; }
+
+  /* ANIMATIONS */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.1s; }
+  .d2 { transition-delay: 0.2s; }
+  .d3 { transition-delay: 0.3s; }
+  .d4 { transition-delay: 0.4s; }
+
+  @media (max-width: 1024px) {
+    nav { padding: 16px 24px; }
+    #products-grid-view { padding: 100px 24px 60px; }
+    .products-grid { grid-template-columns: 1fr; }
+    .detail-hero { padding: 60px 24px 0; }
+    .detail-hero-content { grid-template-columns: 1fr; gap: 40px; }
+    .detail-body { grid-template-columns: 1fr; }
+    .detail-description, .detail-video-panel, .detail-who { padding: 40px 24px; }
+    .who-grid { grid-template-columns: 1fr; }
+    .detail-cta { grid-template-columns: 1fr; padding: 60px 24px; text-align: center; }
+    .related-products { padding: 60px 24px; }
+    .related-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">
+    <span class="nav-logo-main">THE KHAMIS TEAM</span>
+    <span class="nav-logo-sub">EPiQ Lending</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#" class="active">Products</a></li>
+    <li><a href="#">Calculator</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Videos</a></li>
+    <li><a href="#" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- =================== PRODUCTS GRID =================== -->
+<div id="products-grid-view">
+  <div class="products-page-header">
+    <p class="section-label fade-up">Loan Products</p>
+    <div class="orange-line fade-up d1"></div>
+    <h2 class="section-title fade-up d1">Everything<br>We Offer.</h2>
+    <p style="font-family:'Crimson Pro',serif;font-size:18px;color:var(--gray-text);font-style:italic;margin-top:20px;max-width:520px;line-height:1.7;" class="fade-up d2">Click any product to explore the full details — how it works, who it's for, and what to expect.</p>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- ALL IN ONE -->
+    <div class="product-card fade-up" onclick="openProduct('aio')">
+      <div class="product-card-inner">
+        <div class="product-number">01</div>
+        <div class="product-badge">⭐ EPiQ Signature</div>
+        <div class="product-name">The All-In-One Loan</div>
+        <div class="product-tagline">"Your checking account IS your mortgage."</div>
+        <div class="product-desc">A revolutionary principal-first mortgage that combines your home loan and bank account into one — every dollar you deposit reduces your balance immediately, with interest calculated nightly on what you actually owe.</div>
+        <div class="product-quick-facts">
+          <div class="quick-fact"><span class="quick-fact-label">Interest</span><span class="quick-fact-value">Daily</span></div>
+          <div class="quick-fact"><span class="quick-fact-label">Structure</span><span class="quick-fact-value">HELOC + Mortgage</span></div>
+          <div class="quick-fact"><span class="quick-fact-label">Payoff</span><span class="quick-fact-value">Years Faster</span></div>
+        </div>
+        <div class="product-cta">
+          <button class="expand-btn">Explore Product <div class="expand-icon">→</div></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FHA -->
+    <div class="product-card fade-up d1" onclick="openProduct('fha')">
+      <div class="product-card-inner">
+        <div class="product-number">02</div>
+        <div class="product-name">FHA Loans</div>
+        <div class="product-tagline">"The most accessible path to homeownership."</div>
+        <div class="product-desc">Government-backed loans with lower credit requirements, minimal down payments, and the ability to use seller concessions — making homeownership possible for buyers who thought they weren't ready.</div>
+        <div class="product-quick-facts">
+          <div class="quick-fact"><span class="quick-fact-label">Min. Credit</span><span class="quick-fact-value">580+</span></div>
+          <div class="quick-fact"><span class="quick-fact-label">Down Payment</span><span class="quick-fact-value">3.5%</span></div>
+          <div class="quick-fact"><span class="quick-fact-label">Concessions</span><span class="quick-fact-value">Up to 6%</span></div>
+        </div>
+        <div class="product-cta">
+          <button class="expand-btn">Explore Product <div class="expand-icon">→</div></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONVENTIONAL -->
+    <div class="product-card fade-up d2" onclick="openProduct('conventional')">
+      <div class="product-card-inner">
+        <div class="product-number">03</div>
+        <div class="product-name">Conventional</div>
+        <div class="product-tagline">"Reward your financial strength."</div>
+        <div class="product-desc">For buyers with solid credit and financial profiles. More flexible on property types, no upfront mortgage insurance premium, and competitive rates that reflect your creditworthiness.</div>
+        <div class="product-quick-facts">
+          <div class="quick-fact"><span class="quick-fact-label">Min. Credit</span><span class="quick-fact-value">620+</span></div>
+          <div class="quick-fact"><span class="quick-fact-label">Down Payment</span><span class="quick-fact-value">3–20%</span></div>
+          <div class="quick-fact"><span class="quick-fact-label">No PMI at</span><span class="quick-fact-value">20% Down</span></div>
+        </div>
+        <div class="product-cta">
+          <button class="expand-btn">Explore Product <div class="expand-icon">→</div></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VA -->
+    <div class="product-card fade-up" onclick="openProduct('va')">
+      <div class="product-card-inner">
+        <div class="product-number">04</div>
+        <div class="product-badge">For Veterans</div>
+        <div class="product-name">VA Loans</div>
+        <div class="product-tagline">"You earned this benefit. Use it."</div>
+        <div class="product-desc">Zero down payment, no monthly mortgage insurance, and some of the most competitive rates available — exclusively for those who served our country. One of the most powerful loan products in existence.</div>
+        <div class="product-quick-facts">
+          <div class="quick-fact"><span class="quick-fact-label">Down Payment</span><span class="quick-fact-value">$0</span></div>
+          <div class="quick-fact"><span class="quick-fact-label">PMI</span><span class="quick-fact-value">None</span></div>
+          <div class="quick-fact"><span class="quick-fact-label">Min. Credit</span><span class="quick-fact-value">580+</span></div>
+        </div>
+        <div class="product-cta">
+          <button class="expand-btn">Explore Product <div class="expand-icon">→</div></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DSCR -->
+    <div class="product-card fade-up d1" onclick="openProduct('dscr')">
+      <div class="product-card-inner">
+        <div class="product-number">05</div>
+        <div class="product-badge">Investors</div>
+        <div class="product-name">DSCR / Investor</div>
+        <div class="product-tagline">"Qualify on the property, not your income."</div>
+        <div class="product-desc">Debt Service Coverage Ratio loans qualify based on the rental income the property generates — no W2s, no tax returns, no employer verification. Built for serious real estate investors scaling a portfolio.</div>
+        <div class="product-quick-facts">
+          <div class="quick-fact"><span class="quick-fact-label">Income Docs</span><span class="quick-fact-value">None</span></div>
+          <div class="quick-fact"><span class="quick-fact-label">Min. DSCR</span><span class="quick-fact-value">1.0–1.25x</span></div>
+          <div class="quick-fact"><span class="quick-fact-label">Properties</span><span class="quick-fact-value">1–10 Units</span></div>
+        </div>
+        <div class="product-cta">
+          <button class="expand-btn">Explore Product <div class="expand-icon">→</div></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- REFINANCE -->
+    <div class="product-card fade-up d2" onclick="openProduct('refi')">
+      <div class="product-card-inner">
+        <div class="product-number">06</div>
+        <div class="product-name">Refinance</div>
+        <div class="product-tagline">"Your mortgage should evolve with your life."</div>
+        <div class="product-desc">Lower your rate, reduce your term, access equity, or restructure entirely. Strategic refinancing is one of the most underused wealth tools available — and timing it right makes all the difference.</div>
+        <div class="product-quick-facts">
+          <div class="quick-fact"><span class="quick-fact-label">Rate & Term</span><span class="quick-fact-value">✓</span></div>
+          <div class="quick-fact"><span class="quick-fact-label">Cash-Out</span><span class="quick-fact-value">✓</span></div>
+          <div class="quick-fact"><span class="quick-fact-label">Streamline</span><span class="quick-fact-value">FHA/VA</span></div>
+        </div>
+        <div class="product-cta">
+          <button class="expand-btn">Explore Product <div class="expand-icon">→</div></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =================== PRODUCT DETAIL =================== -->
+<div id="product-detail-view">
+  <!-- Content injected by JS -->
+</div>
+
+<script>
+  // ==================== CURSOR ====================
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+
+  (function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  })();
+
+  document.addEventListener('mouseover', e => {
+    const isInteractive = e.target.closest('a,button,.product-card,.related-card');
+    cursor.style.transform = isInteractive ? 'translate(-50%,-50%) scale(2)' : 'translate(-50%,-50%) scale(1)';
+    cursorRing.style.transform = isInteractive ? 'translate(-50%,-50%) scale(1.5)' : 'translate(-50%,-50%) scale(1)';
+  });
+
+  // ==================== SCROLL OBSERVER ====================
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ==================== PRODUCT DATA ====================
+  const products = {
+    aio: {
+      number: '01',
+      badge: '⭐ EPiQ Signature Product',
+      title: 'The All-In-One\nLoan.',
+      tagline: 'Your checking account IS your mortgage. Every dollar you earn works against what you owe.',
+      youtubeId: '', // Drop YouTube video ID here e.g. 'dQw4w9WgXcQ'
+      description: [
+        'The All-In-One Loan is unlike anything most people have ever seen in mortgage. Instead of a traditional fixed payment structure where your interest is front-loaded for the first decade, the All-In-One calculates your interest <strong>every single night</strong> based on your actual outstanding balance.',
+        'Here\'s how it works: your mortgage and your bank accounts are combined into one account. Every dollar of income you deposit immediately reduces your principal balance. Every dollar you spend draws back from that balance. Interest is calculated nightly on whatever your balance happens to be that day.',
+        'The result? <strong>You could pay off a 30-year mortgage in 10-15 years</strong> without changing your lifestyle — simply by letting your paycheck work harder between expenses.',
+      ],
+      benefits: [
+        { strong: 'Principal-First Structure', text: ' — Unlike traditional mortgages that front-load interest, every deposit immediately reduces your balance' },
+        { strong: 'Daily Interest Calculation', text: ' — Interest is recalculated nightly on your true balance, not a fixed amortization schedule' },
+        { strong: 'Full Liquidity Maintained', text: ' — Your equity is accessible like a HELOC — you\'re not locked out of your own money' },
+        { strong: 'One Account, Zero Friction', text: ' — Checking, savings, and mortgage unified. Simplicity that compounds over time' },
+        { strong: 'Pay Off Years Earlier', text: ' — Most clients see 10-15 year payoff timelines on 30-year loans without changing their lifestyle' },
+      ],
+      facts: [
+        { label: 'Interest Calc', value: 'Nightly', sub: 'On actual balance' },
+        { label: 'Structure', value: 'HELOC + Mtg', sub: 'Combined account' },
+        { label: 'Liquidity', value: 'Full', sub: 'Access equity anytime' },
+        { label: 'Payoff Est.', value: '10–15 Yrs', sub: 'vs 30-yr standard' },
+      ],
+      whoFor: [
+        { title: 'W2 Earners', body: 'High income earners who keep cash in checking between expenses — your idle cash becomes a mortgage payment.' },
+        { title: 'Business Owners', body: 'Irregular income? Every deposit hits principal. Every draw is available. Your cash flow becomes your equity builder.' },
+        { title: 'Real Estate Investors', body: 'Use the All-In-One to accelerate equity on your primary residence and free up capital for investments.' },
+        { title: 'Long-Term Thinkers', body: 'If you plan to stay in your home and want to build wealth aggressively without extra payments, this is built for you.' },
+      ],
+      related: ['fha', 'conventional', 'refi'],
+      ctaTitle: 'Ready To Pay Off\nYour Mortgage\nYears Early?',
+    },
+    fha: {
+      number: '02',
+      badge: null,
+      title: 'FHA\nLoans.',
+      tagline: 'Government-backed, buyer-friendly, and structured so that your down payment doesn\'t have to come from your own pocket.',
+      youtubeId: '',
+      description: [
+        'FHA loans are insured by the Federal Housing Administration, which means lenders can offer <strong>more flexible qualification standards</strong> than conventional loans — lower credit score requirements, lower down payments, and more forgiving debt-to-income ratios.',
+        'The real power of an FHA loan in our hands is the seller concession strategy. FHA allows sellers to contribute <strong>up to 6% of the purchase price</strong> toward your closing costs. Structured correctly, this can mean you walk to the closing table with little to nothing out of pocket.',
+        'For first-time buyers especially, FHA is often the fastest path to homeownership — and with the right broker structuring the deal, it\'s far more powerful than most people realize.',
+      ],
+      benefits: [
+        { strong: 'Lower Credit Requirement', text: ' — Qualify with scores as low as 580 with 3.5% down, or 500 with 10% down' },
+        { strong: 'Minimal Down Payment', text: ' — Just 3.5% down required, and that can come from gift funds' },
+        { strong: 'Seller Concessions Up to 6%', text: ' — The seller can cover your closing costs, potentially getting you in for $0 out of pocket' },
+        { strong: 'Flexible DTI', text: ' — Higher debt-to-income ratios accepted vs conventional loans' },
+        { strong: 'Assumable Loan', text: ' — When you sell, a buyer can take over your rate — a major advantage if rates rise' },
+      ],
+      facts: [
+        { label: 'Min. Credit Score', value: '580+', sub: '500+ with 10% down' },
+        { label: 'Down Payment', value: '3.5%', sub: 'Gift funds accepted' },
+        { label: 'Seller Concessions', value: 'Up to 6%', sub: 'Can cover all closing costs' },
+        { label: 'Loan Limit (AZ)', value: '$524,225', sub: '2026 Maricopa County' },
+      ],
+      whoFor: [
+        { title: 'First Time Buyers', body: 'Limited savings? FHA is designed for you. Low down, flexible credit, and seller concessions can cover the rest.' },
+        { title: 'Credit Rebuilders', body: 'If you\'ve had credit challenges in the past, FHA\'s lower thresholds create a path forward.' },
+        { title: 'Gift Fund Recipients', body: 'Receiving money from family for a down payment? FHA fully allows gift funds — no requirement to use your own savings.' },
+        { title: 'Buyers in High-Cost Markets', body: 'FHA loan limits in Maricopa County cover a wide range of Arizona homes, including much of the Phoenix metro.' },
+      ],
+      related: ['aio', 'conventional', 'va'],
+      ctaTitle: 'Let\'s Get You\nInto A Home\nThis Year.',
+    },
+    conventional: {
+      number: '03',
+      badge: null,
+      title: 'Conventional\nLoans.',
+      tagline: 'For buyers who have built strong financial profiles and want a loan that rewards them for it.',
+      youtubeId: '',
+      description: [
+        'Conventional loans are not government-backed — they\'re held to standards set by Fannie Mae and Freddie Mac. This means <strong>stronger credit and income documentation</strong> are required, but in return you get more flexibility, better rates at higher credit scores, and no upfront mortgage insurance premium.',
+        'At 20% down, conventional loans eliminate private mortgage insurance entirely — making them often the most cost-effective product for well-qualified buyers over the long run.',
+        'Conventional loans also offer more <strong>flexibility on property types</strong> — condos, investment properties, second homes — where FHA has restrictions.',
+      ],
+      benefits: [
+        { strong: 'No PMI at 20% Down', text: ' — Eliminate private mortgage insurance entirely and lower your monthly payment permanently' },
+        { strong: 'PMI Cancellable', text: ' — Even if you put less than 20% down, PMI automatically cancels when you reach 20% equity' },
+        { strong: 'More Property Types', text: ' — Condos, second homes, investment properties — conventional is more flexible than FHA on what it will finance' },
+        { strong: 'Better Rates at High Credit', text: ' — 740+ credit scores unlock the most competitive rate tiers available' },
+        { strong: 'Higher Loan Limits', text: ' — Finance more home than FHA limits allow without jumping to jumbo' },
+      ],
+      facts: [
+        { label: 'Min. Credit Score', value: '620+', sub: 'Best rates at 740+' },
+        { label: 'Down Payment', value: '3–20%', sub: 'No PMI at 20%' },
+        { label: 'Loan Limit', value: '$806,500', sub: '2026 conforming limit' },
+        { label: 'PMI', value: 'Cancellable', sub: 'At 20% equity' },
+      ],
+      whoFor: [
+        { title: 'Strong Credit Borrowers', body: '720+ credit score? Conventional typically beats FHA on rate and total cost of financing.' },
+        { title: 'Buyers with 20% Down', body: 'Eliminate PMI entirely and keep your monthly payment as low as possible.' },
+        { title: 'Condo Buyers', body: 'FHA has strict condo approval requirements. Conventional is often the only option for non-warrantable condos.' },
+        { title: 'Second Home Buyers', body: 'Financing a vacation property or a home for family? Conventional is the go-to product.' },
+      ],
+      related: ['aio', 'fha', 'refi'],
+      ctaTitle: 'Let\'s Find The\nRight Loan\nFor You.',
+    },
+    va: {
+      number: '04',
+      badge: 'For Veterans & Active Military',
+      title: 'VA\nLoans.',
+      tagline: 'Zero down. No PMI. Competitive rates. You served — this benefit was built for you.',
+      youtubeId: '',
+      description: [
+        'The VA loan is one of the most powerful mortgage products in existence — and it\'s reserved exclusively for veterans, active-duty service members, and surviving spouses. If you\'ve served, this benefit is yours. <strong>Most veterans never fully use it.</strong>',
+        'With no down payment requirement, no private mortgage insurance, and rates that consistently beat conventional products, the VA loan eliminates the two biggest barriers to homeownership — upfront cash and monthly cost.',
+        'There\'s a one-time VA funding fee, but it can be rolled into the loan — meaning a veteran can purchase a home with <strong>literally zero cash out of pocket</strong> in many cases.',
+      ],
+      benefits: [
+        { strong: '$0 Down Payment', text: ' — No down payment required, regardless of purchase price (subject to entitlement)' },
+        { strong: 'No Private Mortgage Insurance', text: ' — Unlike FHA, VA loans carry zero monthly PMI — ever' },
+        { strong: 'Competitive Rates', text: ' — VA-backed loans consistently offer some of the lowest rates on the market' },
+        { strong: 'Seller Concessions Up to 4%', text: ' — Sellers can contribute toward closing costs, further reducing your out-of-pocket expense' },
+        { strong: 'Reusable Benefit', text: ' — Your VA entitlement can be used multiple times and even used for multiple properties simultaneously' },
+      ],
+      facts: [
+        { label: 'Down Payment', value: '$0', sub: 'Zero required' },
+        { label: 'PMI', value: 'None', sub: 'Ever' },
+        { label: 'Min. Credit', value: '580+', sub: 'Lender overlay' },
+        { label: 'Funding Fee', value: 'Rollable', sub: 'Into the loan balance' },
+      ],
+      whoFor: [
+        { title: 'Veterans', body: 'Honorably discharged veterans are eligible. Your DD-214 is your key — let\'s use the benefit you earned.' },
+        { title: 'Active Duty', body: 'Currently serving? You\'re eligible now. VA loans can be used while on active duty.' },
+        { title: 'Surviving Spouses', body: 'Unremarried surviving spouses of veterans who died in service or from service-connected disability are eligible.' },
+        { title: 'First Time & Repeat Buyers', body: 'Whether it\'s your first home or you\'ve used the benefit before, VA entitlement can be restored and reused.' },
+      ],
+      related: ['aio', 'conventional', 'fha'],
+      ctaTitle: 'Your Benefit\nIs Waiting.\nLet\'s Use It.',
+    },
+    dscr: {
+      number: '05',
+      badge: 'Real Estate Investors',
+      title: 'DSCR\nLoans.',
+      tagline: 'The property qualifies. Not you. No W2s, no tax returns, no employer verification.',
+      youtubeId: '',
+      description: [
+        'DSCR — Debt Service Coverage Ratio — is a loan product designed specifically for real estate investors. Instead of qualifying based on your personal income, you <strong>qualify based on the income the property generates</strong>.',
+        'The DSCR is calculated by dividing the property\'s monthly rent by the monthly mortgage payment (PITIA). A ratio of 1.0 means the rent exactly covers the payment. Most lenders want 1.0–1.25x. A strong rental market and the right property can make this easy to hit.',
+        'No tax returns means <strong>no depreciation working against you</strong>. No W2 means self-employed investors and business owners aren\'t penalized for their write-offs. This is the product serious portfolio builders use to scale without conventional financing limitations.',
+      ],
+      benefits: [
+        { strong: 'No Income Documentation', text: ' — No W2s, tax returns, pay stubs, or employer letters required' },
+        { strong: 'Business Entity Vesting', text: ' — Close in an LLC or corporation to protect your assets and separate your liability' },
+        { strong: 'Scale Your Portfolio', text: ' — Unlike conventional which limits you to 10 financed properties, DSCR has no such restriction' },
+        { strong: 'Short-Term Rentals Allowed', text: ' — Many DSCR lenders count Airbnb and VRBO income toward qualification' },
+        { strong: 'Cash-Out Available', text: ' — Access equity from existing investment properties to fund your next acquisition' },
+      ],
+      facts: [
+        { label: 'Income Docs', value: 'None', sub: 'Property income only' },
+        { label: 'Min. DSCR', value: '1.0–1.25x', sub: 'Rent / PITIA ratio' },
+        { label: 'Entity Vesting', value: 'LLC OK', sub: 'Close in your entity' },
+        { label: 'Property Types', value: '1–10 Units', sub: 'SFR, multi, STR' },
+      ],
+      whoFor: [
+        { title: 'Portfolio Builders', body: 'Scaling beyond 10 conventional loans? DSCR has no portfolio limit and doesn\'t touch your personal DTI.' },
+        { title: 'Self-Employed Investors', body: 'Your tax write-offs won\'t hurt you here. DSCR ignores your personal tax returns entirely.' },
+        { title: 'Short-Term Rental Hosts', body: 'Running Airbnb properties? Many DSCR products allow projected STR income for qualification.' },
+        { title: 'Equity Extractors', body: 'Want to pull cash out of an existing rental without documenting income? DSCR cash-out refinance makes it possible.' },
+      ],
+      related: ['aio', 'conventional', 'refi'],
+      ctaTitle: 'Ready To Scale\nYour Portfolio\nFaster?',
+    },
+    refi: {
+      number: '06',
+      badge: null,
+      title: 'Refinance.',
+      tagline: 'Your mortgage should evolve as your life does. Lower your rate, access equity, or accelerate your payoff.',
+      youtubeId: '',
+      description: [
+        'A refinance replaces your existing mortgage with a new one — ideally with better terms. The right refinance at the right time can <strong>save tens of thousands of dollars</strong> over the remaining life of your loan, or unlock equity to fund investments, renovations, or financial goals.',
+        'There are several types of refinance and the right one depends entirely on your situation: rate and term refinance to lower your payment or shorten your loan; cash-out refinance to access equity as liquid capital; streamline refinance (FHA or VA) to reduce paperwork and close faster.',
+        'The critical variable is timing. Refinancing into a lower rate only makes sense if the <strong>break-even on closing costs</strong> aligns with how long you plan to stay. We run that math for every client before recommending anything.',
+      ],
+      benefits: [
+        { strong: 'Rate & Term Refi', text: ' — Lower your interest rate, reduce your monthly payment, or shorten your loan term' },
+        { strong: 'Cash-Out Refi', text: ' — Access your equity as cash — for investments, renovations, debt consolidation, or anything else' },
+        { strong: 'FHA/VA Streamline', text: ' — Simplified refinance with less documentation, faster closing, and minimal out-of-pocket cost' },
+        { strong: 'Remove PMI', text: ' — Reached 20% equity? Refinance into a conventional loan and eliminate your monthly PMI permanently' },
+        { strong: 'Switch Loan Type', text: ' — Convert from FHA to conventional, ARM to fixed, or vice versa based on your current situation' },
+      ],
+      facts: [
+        { label: 'Rate & Term', value: 'Lower PMT', sub: 'Or shorter term' },
+        { label: 'Cash-Out', value: 'Up to 80%', sub: 'LTV conventional' },
+        { label: 'Streamline', value: 'FHA & VA', sub: 'Minimal docs' },
+        { label: 'Break-Even', value: 'We Calculate', sub: 'Before recommending' },
+      ],
+      whoFor: [
+        { title: 'Rate Improvement Seekers', body: 'If today\'s rate is materially lower than yours and you plan to stay long-term, the math often works strongly in your favor.' },
+        { title: 'Equity Access Needed', body: 'Home appreciated significantly? Cash-out refinance converts that equity into deployable capital.' },
+        { title: 'PMI Eliminators', body: 'Hit 20% equity through appreciation or paydown? Refinance into a conventional loan and drop the PMI permanently.' },
+        { title: 'FHA to Conventional Movers', body: 'Strong credit and 20%+ equity in an FHA loan? Refinancing to conventional removes the lifetime MIP requirement.' },
+      ],
+      related: ['aio', 'fha', 'dscr'],
+      ctaTitle: 'Let\'s See If\nA Refi Makes\nSense For You.',
+    },
+  };
+
+  const productNames = {
+    aio: 'The All-In-One',
+    fha: 'FHA Loans',
+    conventional: 'Conventional',
+    va: 'VA Loans',
+    dscr: 'DSCR / Investor',
+    refi: 'Refinance',
+  };
+
+  const productDescs = {
+    aio: 'Principal-first mortgage combining checking and home loan into one account.',
+    fha: 'Government-backed loans with low credit requirements and minimal down payment.',
+    conventional: 'For strong credit borrowers seeking competitive rates and flexible terms.',
+    va: 'Zero down, no PMI — exclusively for those who served.',
+    dscr: 'Qualify on rental income, not your personal income. No W2s required.',
+    refi: 'Lower your rate, access equity, or restructure your existing mortgage.',
+  };
+
+  // ==================== OPEN PRODUCT ====================
+  function openProduct(id) {
+    const p = products[id];
+    if (!p) return;
+
+    const relatedHTML = p.related.map(rid => `
+      <div class="related-card" onclick="openProduct('${rid}')">
+        <div class="related-name">${productNames[rid]}</div>
+        <div class="related-desc">${productDescs[rid]}</div>
+        <button class="related-link">Explore →</button>
+      </div>
+    `).join('');
+
+    const videoHTML = p.youtubeId
+      ? `<iframe src="https://www.youtube.com/embed/${p.youtubeId}" allowfullscreen></iframe>`
+      : `<div class="video-placeholder">
+          <div class="video-placeholder-icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="video-placeholder-text">Video Coming Soon</div>
+          <div class="video-placeholder-sub">Paste your YouTube video ID into the code to embed here</div>
+        </div>`;
+
+    const badgeHTML = p.badge
+      ? `<div class="detail-badge">${p.badge}</div>`
+      : '';
+
+    const ctaLines = p.ctaTitle.split('\n');
+
+    document.getElementById('product-detail-view').innerHTML = `
+      <div class="detail-hero" data-number="${p.number}">
+        <button class="back-btn" onclick="closeProduct()">
+          <div class="back-arrow">←</div>
+          All Products
+        </button>
+        <div class="detail-hero-content">
+          <div>
+            ${badgeHTML}
+            <h1 class="detail-title">${p.title.replace('\n','<br>')}</h1>
+            <p class="detail-tagline">${p.tagline}</p>
+          </div>
+          <div class="detail-hero-facts">
+            ${p.facts.map(f => `
+              <div class="detail-fact">
+                <div class="detail-fact-label">${f.label}</div>
+                <div class="detail-fact-value">${f.value}</div>
+                <div class="detail-fact-sub">${f.sub}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-body">
+        <div class="detail-description">
+          <h3>How It Works</h3>
+          ${p.description.map(d => `<p class="detail-body-text">${d}</p>`).join('')}
+          <div class="detail-benefits">
+            ${p.benefits.map(b => `
+              <div class="detail-benefit">
+                <div class="benefit-dot"></div>
+                <div class="benefit-text"><strong>${b.strong}</strong>${b.text}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        <div class="detail-video-panel">
+          <h3>Watch The Breakdown</h3>
+          <div class="video-embed-container">${videoHTML}</div>
+          <p style="font-family:'Crimson Pro',serif;font-style:italic;font-size:16px;color:var(--gray-text);line-height:1.65;">Questions after watching? Drake is available to walk through your specific situation — no pressure, just clarity.</p>
+          <button class="btn-primary" onclick="alert('Navigate to contact')">Talk to Drake →</button>
+        </div>
+      </div>
+
+      <div class="detail-who">
+        <h3>Who This Is For</h3>
+        <div class="who-grid">
+          ${p.whoFor.map(w => `
+            <div class="who-card">
+              <div class="who-card-title">${w.title}</div>
+              <div class="who-card-body">${w.body}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="detail-cta">
+        <div>
+          <h2 class="detail-cta-title">${ctaLines.map((l,i) => i === 1 ? `<span>${l}</span>` : l).join('<br>')}</h2>
+        </div>
+        <button class="btn-white" onclick="alert('Navigate to contact')">Schedule a Call</button>
+      </div>
+
+      <div class="related-products">
+        <h3>Other Products to Explore</h3>
+        <div class="related-grid">${relatedHTML}</div>
+      </div>
+    `;
+
+    document.getElementById('products-grid-view').style.display = 'none';
+    const detail = document.getElementById('product-detail-view');
+    detail.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function closeProduct() {
+    document.getElementById('product-detail-view').classList.remove('active');
+    document.getElementById('product-detail-view').innerHTML = '';
+    document.getElementById('products-grid-view').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
