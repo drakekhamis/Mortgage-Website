@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · The Khamis Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FAF8F5;
+  --cream-2:#F2EDE5;
+  --cream-3:#EAE3D7;
+  --ink:#1A1A1A;
+  --ink-2:#3A3A3A;
+  --muted:#6B6B6B;
+  --line:#E8E4DD;
+  --line-2:#D9D2C4;
+  --orange:#E05A00;
+  --orange-soft:#FBEFE4;
+  --green:#1F6B3C;
+  --green-soft:#E8F5ED;
+  --red:#9B1C1C;
+  --red-soft:#FEF2F2;
+  --fd:'Fraunces',Georgia,serif;
+  --fb:'Inter',sans-serif;
+  --r:8px;
+  --rl:12px;
+  --t:.22s ease;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--cream-2);color:var(--ink);font-family:var(--fb);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer;border:none}
+input,select,textarea{font-family:inherit}
+
+/* LOGIN */
+#login-screen{
+  position:fixed;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--ink);z-index:100;
+}
+.login-card{
+  background:var(--cream);border-radius:16px;
+  padding:52px 48px;width:100%;max-width:420px;
+  box-shadow:0 24px 64px rgba(0,0,0,.4);
+}
+.login-logo{font-family:var(--fd);font-size:22px;font-weight:500;margin-bottom:6px}
+.login-logo em{font-style:italic;font-weight:400}
+.login-sub{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:40px;font-weight:500}
+.login-card h2{font-family:var(--fd);font-size:28px;font-weight:400;margin-bottom:28px;letter-spacing:-.015em}
+.lf{margin-bottom:18px}
+.lf label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;font-weight:500}
+.lf input{
+  width:100%;background:var(--cream-2);border:1px solid var(--line);
+  border-radius:var(--r);padding:12px 14px;font-size:15px;color:var(--ink);
+  transition:border-color var(--t);
+}
+.lf input:focus{outline:none;border-color:var(--orange);background:#fff}
+.login-btn{
+  width:100%;background:var(--ink);color:var(--cream);
+  padding:13px;border-radius:100px;font-size:14px;font-weight:500;
+  margin-top:8px;transition:background var(--t);
+}
+.login-btn:hover{background:var(--orange)}
+.login-err{background:var(--red-soft);border:1px solid #FECACA;border-radius:var(--r);padding:11px 14px;font-size:13px;color:var(--red);margin-top:14px;display:none}
+
+/* ADMIN LAYOUT */
+#admin-app{display:none;height:100vh;overflow:hidden}
+.admin-layout{display:grid;grid-template-columns:240px 1fr;height:100%}
+
+/* SIDEBAR */
+.sidebar{
+  background:var(--ink);color:var(--cream);
+  display:flex;flex-direction:column;
+  overflow-y:auto;
+}
+.sb-brand{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-brand .name{font-family:var(--fd);font-size:17px;font-weight:500}
+.sb-brand .name em{font-style:italic;font-weight:400}
+.sb-brand .role{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:4px;font-weight:500}
+.sb-nav{padding:16px 12px;flex:1}
+.sb-section{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:14px 12px 8px;font-weight:500}
+.sb-link{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;border-radius:var(--r);
+  font-size:13.5px;font-weight:500;color:rgba(255,255,255,.65);
+  cursor:pointer;transition:all var(--t);margin-bottom:2px;
+}
+.sb-link:hover{background:rgba(255,255,255,.07);color:#fff}
+.sb-link.active{background:rgba(224,90,0,.2);color:var(--orange)}
+.sb-link .icon{font-size:15px;width:20px;text-align:center}
+.sb-footer{padding:16px 16px 24px;border-top:1px solid rgba(255,255,255,.08)}
+.sb-user{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb-logout{
+  width:100%;background:rgba(255,255,255,.07);color:rgba(255,255,255,.65);
+  padding:9px;border-radius:var(--r);font-size:13px;font-weight:500;
+  transition:all var(--t);
+}
+.sb-logout:hover{background:rgba(255,255,255,.12);color:#fff}
+
+/* MAIN CONTENT */
+.main{overflow-y:auto;background:var(--cream-2)}
+.main-header{
+  background:var(--cream);border-bottom:1px solid var(--line);
+  padding:20px 36px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:10;
+}
+.main-header h1{font-family:var(--fd);font-size:22px;font-weight:500;letter-spacing:-.01em}
+.main-header .hdr-sub{font-size:13px;color:var(--muted);margin-top:2px}
+
+/* PANELS */
+.panel{display:none;padding:32px 36px 60px}
+.panel.active{display:block}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+.stat-card{background:var(--cream);border:1px solid var(--line);border-radius:var(--rl);padding:20px 22px}
+.stat-card .sc-num{font-family:var(--fd);font-size:36px;font-weight:400;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.stat-card .sc-num em{font-style:italic;color:var(--orange)}
+.stat-card .sc-lbl{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:500}
+
+/* SECTION HEADER */
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.sec-hdr h2{font-family:var(--fd);font-size:20px;font-weight:500;letter-spacing:-.01em}
+.btn-new{
+  background:var(--ink);color:var(--cream);
+  padding:10px 20px;border-radius:100px;font-size:13px;font-weight:500;
+  transition:background var(--t);display:inline-flex;align-items:center;gap:8px;
+}
+.btn-new:hover{background:var(--orange)}
+
+/* TABLE */
+.table-wrap{background:var(--cream);border:1px solid var(--line);border-radius:var(--rl);overflow:hidden}
+.admin-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.admin-table thead th{
+  background:var(--cream-2);color:var(--muted);
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  padding:12px 16px;text-align:left;font-weight:500;border-bottom:1px solid var(--line);
+}
+.admin-table tbody tr{border-bottom:1px solid var(--line);transition:background var(--t)}
+.admin-table tbody tr:last-child{border-bottom:none}
+.admin-table tbody tr:hover{background:var(--cream-2)}
+.admin-table td{padding:14px 16px;color:var(--ink-2);vertical-align:middle}
+.admin-table td.title-cell{color:var(--ink);font-weight:500;max-width:280px}
+.admin-table td.title-cell p{font-size:12.5px;color:var(--muted);font-weight:400;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;font-size:11.5px;font-weight:500}
+.badge-pub{background:var(--green-soft);color:var(--green)}
+.badge-draft{background:var(--cream-3);color:var(--muted)}
+.badge-cat{background:var(--orange-soft);color:var(--orange)}
+.action-btns{display:flex;gap:8px;align-items:center}
+.btn-edit{background:var(--cream-2);color:var(--ink);border:1px solid var(--line);padding:6px 14px;border-radius:100px;font-size:12px;font-weight:500;transition:all var(--t)}
+.btn-edit:hover{border-color:var(--ink)}
+.btn-toggle{padding:6px 14px;border-radius:100px;font-size:12px;font-weight:500;transition:all var(--t)}
+.btn-publish{background:var(--green-soft);color:var(--green);border:1px solid #A8D9BD}
+.btn-publish:hover{background:#D1FAE5}
+.btn-unpublish{background:var(--red-soft);color:var(--red);border:1px solid #FECACA}
+.btn-unpublish:hover{background:#FEE2E2}
+.btn-delete{background:none;color:var(--muted);border:none;padding:6px;font-size:15px;transition:color var(--t)}
+.btn-delete:hover{color:var(--red)}
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-state .es-icon{font-size:40px;margin-bottom:14px;opacity:.4}
+.empty-state p{font-size:14px;line-height:1.6}
+
+/* MODAL */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(26,26,26,.6);
+  z-index:200;display:flex;align-items:flex-start;justify-content:center;
+  padding:40px 20px;overflow-y:auto;
+  opacity:0;pointer-events:none;transition:opacity var(--t);
+}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{
+  background:var(--cream);border-radius:16px;
+  width:100%;max-width:720px;
+  box-shadow:0 24px 64px rgba(0,0,0,.25);
+  transform:translateY(12px);transition:transform var(--t);
+  margin:auto;
+}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal-hdr{padding:28px 32px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.modal-hdr h3{font-family:var(--fd);font-size:22px;font-weight:500;letter-spacing:-.01em}
+.modal-close{background:var(--cream-2);border:1px solid var(--line);color:var(--muted);width:32px;height:32px;border-radius:50%;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all var(--t)}
+.modal-close:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.modal-body{padding:28px 32px}
+.mf{margin-bottom:20px}
+.mf label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:500}
+.mf input,.mf select,.mf textarea{
+  width:100%;background:var(--cream-2);border:1px solid var(--line);
+  border-radius:var(--r);padding:12px 14px;font-size:15px;color:var(--ink);
+  transition:border-color var(--t);resize:vertical;
+}
+.mf input:focus,.mf select:focus,.mf textarea:focus{outline:none;border-color:var(--orange);background:#fff}
+.mf textarea{min-height:120px;line-height:1.6}
+.mf textarea.content{min-height:260px;font-size:14px}
+.mf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.modal-footer{padding:20px 32px 28px;border-top:1px solid var(--line);display:flex;gap:12px;justify-content:flex-end}
+.btn-save{background:var(--ink);color:var(--cream);padding:11px 26px;border-radius:100px;font-size:13.5px;font-weight:500;transition:background var(--t)}
+.btn-save:hover{background:var(--orange)}
+.btn-cancel{background:var(--cream-2);color:var(--ink);border:1px solid var(--line);padding:11px 22px;border-radius:100px;font-size:13.5px;font-weight:500;transition:all var(--t)}
+.btn-cancel:hover{border-color:var(--ink)}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:28px;right:28px;
+  background:var(--ink);color:var(--cream);
+  padding:13px 20px;border-radius:100px;
+  font-size:13.5px;font-weight:500;
+  box-shadow:0 8px 24px rgba(0,0,0,.25);
+  transform:translateY(60px);opacity:0;
+  transition:all .3s ease;z-index:300;
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{background:var(--green)}
+.toast.error{background:var(--red)}
+
+/* LOADING */
+.loading{text-align:center;padding:40px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">The Khamis <em>Team</em></div>
+    <div class="login-sub">Admin Dashboard</div>
+    <h2>Sign in</h2>
+    <div class="lf"><label>Email</label><input type="email" id="login-email" placeholder="your@email.com" autocomplete="email"></div>
+    <div class="lf"><label>Password</label><input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password"></div>
+    <button class="login-btn" onclick="signIn()">Sign in →</button>
+    <div class="login-err" id="login-err"></div>
+  </div>
+</div>
+
+<!-- ADMIN APP -->
+<div id="admin-app">
+  <div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sb-brand">
+        <div class="name">The Khamis <em>Team</em></div>
+        <div class="role">Content Dashboard</div>
+      </div>
+      <nav class="sb-nav">
+        <div class="sb-section">Overview</div>
+        <div class="sb-link active" onclick="showPanel('dashboard',this)"><span class="icon">⊞</span>Dashboard</div>
+        <div class="sb-section">Content</div>
+        <div class="sb-link" onclick="showPanel('posts',this)"><span class="icon">✍</span>Blog posts</div>
+        <div class="sb-link" onclick="showPanel('videos',this)"><span class="icon">▶</span>Videos</div>
+        <div class="sb-section">Site</div>
+        <div class="sb-link" onclick="window.open('index.html','_blank')"><span class="icon">↗</span>View website</div>
+      </nav>
+      <div class="sb-footer">
+        <div class="sb-user" id="sb-user-email">Loading...</div>
+        <button class="sb-logout" onclick="signOut()">Sign out</button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- DASHBOARD PANEL -->
+      <div id="panel-dashboard" class="panel active">
+        <div class="main-header">
+          <div><h1>Dashboard</h1><div class="hdr-sub">Welcome back, Drake.</div></div>
+        </div>
+        <div style="padding:32px 36px 60px">
+          <div class="stats-row">
+            <div class="stat-card"><div class="sc-num" id="stat-total-posts">—</div><div class="sc-lbl">Total posts</div></div>
+            <div class="stat-card"><div class="sc-num" id="stat-pub-posts">—</div><div class="sc-lbl">Published posts</div></div>
+            <div class="stat-card"><div class="sc-num" id="stat-total-videos">—</div><div class="sc-lbl">Total videos</div></div>
+            <div class="stat-card"><div class="sc-num" id="stat-pub-videos">—</div><div class="sc-lbl">Published videos</div></div>
+          </div>
+          <div class="sec-hdr" style="margin-top:8px">
+            <h2>Recent posts</h2>
+            <button class="btn-new" onclick="showPanel('posts',document.querySelector('[onclick*=\"posts\"]'));openPostModal()">+ New post</button>
+          </div>
+          <div class="table-wrap" id="dash-recent"></div>
+        </div>
+      </div>
+
+      <!-- POSTS PANEL -->
+      <div id="panel-posts" class="panel">
+        <div class="main-header">
+          <div><h1>Blog posts</h1><div class="hdr-sub">Write, publish, and manage your blog content.</div></div>
+          <button class="btn-new" onclick="openPostModal()">+ New post</button>
+        </div>
+        <div style="padding:32px 36px 60px">
+          <div class="table-wrap" id="posts-table"></div>
+        </div>
+      </div>
+
+      <!-- VIDEOS PANEL -->
+      <div id="panel-videos" class="panel">
+        <div class="main-header">
+          <div><h1>Videos</h1><div class="hdr-sub">Add and manage your YouTube videos.</div></div>
+          <button class="btn-new" onclick="openVideoModal()">+ Add video</button>
+        </div>
+        <div style="padding:32px 36px 60px">
+          <div class="table-wrap" id="videos-table"></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- POST MODAL -->
+<div class="modal-overlay" id="post-modal">
+  <div class="modal">
+    <div class="modal-hdr">
+      <h3 id="post-modal-title">New post</h3>
+      <button class="modal-close" onclick="closeModal('post-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="post-id">
+      <div class="mf"><label>Title</label><input type="text" id="post-title" placeholder="Your post title..."></div>
+      <div class="mf-row">
+        <div class="mf"><label>Category</label>
+          <select id="post-category">
+            <option value="Market update">Market update</option>
+            <option value="Rates">Rates</option>
+            <option value="First-time buyers">First-time buyers</option>
+            <option value="VA loans">VA loans</option>
+            <option value="Refinance">Refinance</option>
+            <option value="Investing">Investing</option>
+            <option value="All-In-One">All-In-One</option>
+            <option value="Tips">Tips</option>
+          </select>
+        </div>
+        <div class="mf"><label>Date</label><input type="date" id="post-date"></div>
+      </div>
+      <div class="mf"><label>Excerpt (shown on blog grid)</label><textarea id="post-excerpt" placeholder="A short summary shown on the blog page..." style="min-height:80px"></textarea></div>
+      <div class="mf"><label>Full content</label><textarea class="content" id="post-content" placeholder="Write your full blog post here..."></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal('post-modal')">Cancel</button>
+      <button class="btn-save" onclick="savePost(false)">Save as draft</button>
+      <button class="btn-save" style="background:var(--orange)" onclick="savePost(true)">Publish</button>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO MODAL -->
+<div class="modal-overlay" id="video-modal">
+  <div class="modal">
+    <div class="modal-hdr">
+      <h3 id="video-modal-title">Add video</h3>
+      <button class="modal-close" onclick="closeModal('video-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="video-id">
+      <div class="mf"><label>Title</label><input type="text" id="video-title" placeholder="Video title..."></div>
+      <div class="mf"><label>YouTube URL</label><input type="url" id="video-url" placeholder="https://www.youtube.com/watch?v=..."></div>
+      <div class="mf"><label>Description</label><textarea id="video-description" placeholder="Brief description of the video..." style="min-height:100px"></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal('video-modal')">Cancel</button>
+      <button class="btn-save" onclick="saveVideo(false)">Save as draft</button>
+      <button class="btn-save" style="background:var(--orange)" onclick="saveVideo(true)">Publish</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'https://zvuwlecjxaybfhoxrfam.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_YhEoBT8zkgy5Bvx-IbPHKg_8-UaVGts';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let currentUser = null;
+let allPosts = [];
+let allVideos = [];
+
+/* ============ AUTH ============ */
+async function signIn(){
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const err = document.getElementById('login-err');
+  err.style.display = 'none';
+  if(!email || !password){ showErr('Please enter your email and password.'); return; }
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  if(error){ showErr(error.message); return; }
+  currentUser = data.user;
+  bootApp();
+}
+
+function showErr(msg){
+  const err = document.getElementById('login-err');
+  err.textContent = msg;
+  err.style.display = 'block';
+}
+
+async function signOut(){
+  await sb.auth.signOut();
+  location.reload();
+}
+
+async function checkAuth(){
+  const { data } = await sb.auth.getSession();
+  if(data.session){
+    currentUser = data.session.user;
+    bootApp();
+  }
+}
+
+function bootApp(){
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('admin-app').style.display = 'block';
+  document.getElementById('sb-user-email').textContent = currentUser.email;
+  loadAll();
+}
+
+/* ============ LOAD DATA ============ */
+async function loadAll(){
+  await Promise.all([loadPosts(), loadVideos()]);
+  renderDashboard();
+  renderPostsTable();
+  renderVideosTable();
+}
+
+async function loadPosts(){
+  const { data, error } = await sb.from('posts').select('*').order('created_at', { ascending: false });
+  if(!error) allPosts = data || [];
+}
+
+async function loadVideos(){
+  const { data, error } = await sb.from('videos').select('*').order('created_at', { ascending: false });
+  if(!error) allVideos = data || [];
+}
+
+/* ============ DASHBOARD ============ */
+function renderDashboard(){
+  document.getElementById('stat-total-posts').textContent = allPosts.length;
+  document.getElementById('stat-pub-posts').textContent = allPosts.filter(p=>p.published).length;
+  document.getElementById('stat-total-videos').textContent = allVideos.length;
+  document.getElementById('stat-pub-videos').textContent = allVideos.filter(v=>v.published).length;
+  const recent = allPosts.slice(0,5);
+  const el = document.getElementById('dash-recent');
+  if(!recent.length){ el.innerHTML = emptyState('No posts yet','Click "New post" to write your first blog post.'); return; }
+  el.innerHTML = postTableHTML(recent);
+}
+
+/* ============ POSTS TABLE ============ */
+function renderPostsTable(){
+  const el = document.getElementById('posts-table');
+  if(!allPosts.length){ el.innerHTML = emptyState('No posts yet','Click "+ New post" to write your first blog post.'); return; }
+  el.innerHTML = postTableHTML(allPosts);
+}
+
+function postTableHTML(posts){
+  return `
+    <table class="admin-table">
+      <thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${posts.map(p=>`
+          <tr>
+            <td class="title-cell">${escHtml(p.title)}<p>${escHtml(p.excerpt||'')}</p></td>
+            <td><span class="badge badge-cat">${escHtml(p.category||'')}</span></td>
+            <td style="white-space:nowrap;color:var(--muted)">${formatDate(p.date)}</td>
+            <td><span class="badge ${p.published?'badge-pub':'badge-draft'}">${p.published?'Published':'Draft'}</span></td>
+            <td>
+              <div class="action-btns">
+                <button class="btn-edit" onclick="editPost('${p.id}')">Edit</button>
+                <button class="btn-toggle ${p.published?'btn-unpublish':'btn-publish'}" onclick="togglePost('${p.id}',${p.published})">${p.published?'Unpublish':'Publish'}</button>
+                <button class="btn-delete" onclick="deletePost('${p.id}')" title="Delete">🗑</button>
+              </div>
+            </td>
+          </tr>`).join('')}
+      </tbody>
+    </table>`;
+}
+
+/* ============ VIDEOS TABLE ============ */
+function renderVideosTable(){
+  const el = document.getElementById('videos-table');
+  if(!allVideos.length){ el.innerHTML = emptyState('No videos yet','Click "+ Add video" to add your first YouTube video.'); return; }
+  el.innerHTML = `
+    <table class="admin-table">
+      <thead><tr><th>Title</th><th>YouTube URL</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${allVideos.map(v=>`
+          <tr>
+            <td class="title-cell">${escHtml(v.title)}<p>${escHtml(v.description||'')}</p></td>
+            <td style="color:var(--muted);font-size:12.5px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escHtml(v.youtube_url||'')}</td>
+            <td><span class="badge ${v.published?'badge-pub':'badge-draft'}">${v.published?'Published':'Draft'}</span></td>
+            <td>
+              <div class="action-btns">
+                <button class="btn-edit" onclick="editVideo('${v.id}')">Edit</button>
+                <button class="btn-toggle ${v.published?'btn-unpublish':'btn-publish'}" onclick="toggleVideo('${v.id}',${v.published})">${v.published?'Unpublish':'Publish'}</button>
+                <button class="btn-delete" onclick="deleteVideo('${v.id}')" title="Delete">🗑</button>
+              </div>
+            </td>
+          </tr>`).join('')}
+      </tbody>
+    </table>`;
+}
+
+/* ============ POST MODAL ============ */
+function openPostModal(post=null){
+  document.getElementById('post-modal-title').textContent = post ? 'Edit post' : 'New post';
+  document.getElementById('post-id').value = post?.id || '';
+  document.getElementById('post-title').value = post?.title || '';
+  document.getElementById('post-category').value = post?.category || 'Market update';
+  document.getElementById('post-date').value = post?.date || new Date().toISOString().split('T')[0];
+  document.getElementById('post-excerpt').value = post?.excerpt || '';
+  document.getElementById('post-content').value = post?.content || '';
+  openModal('post-modal');
+}
+
+function editPost(id){
+  const post = allPosts.find(p=>p.id===id);
+  if(post) openPostModal(post);
+}
+
+async function savePost(publish){
+  const id = document.getElementById('post-id').value;
+  const title = document.getElementById('post-title').value.trim();
+  if(!title){ showToast('Please enter a title.','error'); return; }
+  const data = {
+    title,
+    category: document.getElementById('post-category').value,
+    date: document.getElementById('post-date').value,
+    excerpt: document.getElementById('post-excerpt').value.trim(),
+    content: document.getElementById('post-content').value.trim(),
+    published: publish,
+    updated_at: new Date().toISOString()
+  };
+  let error;
+  if(id){
+    ({ error } = await sb.from('posts').update(data).eq('id',id));
+  } else {
+    ({ error } = await sb.from('posts').insert(data));
+  }
+  if(error){ showToast('Error saving post: '+error.message,'error'); return; }
+  closeModal('post-modal');
+  showToast(publish ? 'Post published!' : 'Saved as draft.','success');
+  await loadPosts();
+  renderDashboard();
+  renderPostsTable();
+}
+
+async function togglePost(id, current){
+  const { error } = await sb.from('posts').update({ published: !current, updated_at: new Date().toISOString() }).eq('id',id);
+  if(error){ showToast('Error updating post.','error'); return; }
+  showToast(!current ? 'Post published!' : 'Post unpublished.','success');
+  await loadPosts();
+  renderDashboard();
+  renderPostsTable();
+}
+
+async function deletePost(id){
+  if(!confirm('Delete this post? This cannot be undone.')) return;
+  const { error } = await sb.from('posts').delete().eq('id',id);
+  if(error){ showToast('Error deleting post.','error'); return; }
+  showToast('Post deleted.','success');
+  await loadPosts();
+  renderDashboard();
+  renderPostsTable();
+}
+
+/* ============ VIDEO MODAL ============ */
+function openVideoModal(video=null){
+  document.getElementById('video-modal-title').textContent = video ? 'Edit video' : 'Add video';
+  document.getElementById('video-id').value = video?.id || '';
+  document.getElementById('video-title').value = video?.title || '';
+  document.getElementById('video-url').value = video?.youtube_url || '';
+  document.getElementById('video-description').value = video?.description || '';
+  openModal('video-modal');
+}
+
+function editVideo(id){
+  const video = allVideos.find(v=>v.id===id);
+  if(video) openVideoModal(video);
+}
+
+async function saveVideo(publish){
+  const id = document.getElementById('video-id').value;
+  const title = document.getElementById('video-title').value.trim();
+  const url = document.getElementById('video-url').value.trim();
+  if(!title || !url){ showToast('Please enter a title and YouTube URL.','error'); return; }
+  const data = {
+    title,
+    youtube_url: url,
+    description: document.getElementById('video-description').value.trim(),
+    published: publish
+  };
+  let error;
+  if(id){
+    ({ error } = await sb.from('videos').update(data).eq('id',id));
+  } else {
+    ({ error } = await sb.from('videos').insert(data));
+  }
+  if(error){ showToast('Error saving video: '+error.message,'error'); return; }
+  closeModal('video-modal');
+  showToast(publish ? 'Video published!' : 'Saved as draft.','success');
+  await loadVideos();
+  renderDashboard();
+  renderVideosTable();
+}
+
+async function toggleVideo(id, current){
+  const { error } = await sb.from('videos').update({ published: !current }).eq('id',id);
+  if(error){ showToast('Error updating video.','error'); return; }
+  showToast(!current ? 'Video published!' : 'Video unpublished.','success');
+  await loadVideos();
+  renderDashboard();
+  renderVideosTable();
+}
+
+async function deleteVideo(id){
+  if(!confirm('Delete this video? This cannot be undone.')) return;
+  const { error } = await sb.from('videos').delete().eq('id',id);
+  if(error){ showToast('Error deleting video.','error'); return; }
+  showToast('Video deleted.','success');
+  await loadVideos();
+  renderDashboard();
+  renderVideosTable();
+}
+
+/* ============ UI HELPERS ============ */
+function showPanel(name, el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sb-link').forEach(l=>l.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  if(el) el.classList.add('active');
+}
+
+function openModal(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+let toastTimer;
+function showToast(msg, type='success'){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.className='toast',3000);
+}
+
+function emptyState(title, msg){
+  return `<div class="empty-state"><div class="es-icon">📝</div><strong>${title}</strong><p>${msg}</p></div>`;
+}
+
+function formatDate(d){
+  if(!d) return '—';
+  return new Date(d+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+}
+
+function escHtml(str){
+  if(!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ============ KEYBOARD ============ */
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){
+    closeModal('post-modal');
+    closeModal('video-modal');
+  }
+});
+document.getElementById('login-password').addEventListener('keydown', e=>{
+  if(e.key==='Enter') signIn();
+});
+
+/* Close modal on overlay click */
+document.querySelectorAll('.modal-overlay').forEach(overlay=>{
+  overlay.addEventListener('click', e=>{
+    if(e.target === overlay) closeModal(overlay.id);
+  });
+});
+
+/* ============ INIT ============ */
+checkAuth();
+</script>
+</body>
+</html>
